@@ -62,26 +62,47 @@ class MockDatabase {
 
   // Initial Seed
   seed(): void {
-    if (this.getUsers().length === 0) {
-      const admin: User = {
+    const existingUsers = this.getUsers();
+    
+    // Lista de usuários padrão desejados
+    const defaultUsers: User[] = [
+      {
         id: 'admin-1',
         email: 'admin@consus.com',
         password: 'admin',
-        name: 'Administrador Sistema',
+        name: 'Administrador Consus',
         role: 'ADMIN',
         createdAt: new Date().toISOString()
-      };
-      this.saveUser(admin);
-      
-      const collector: User = {
+      },
+      {
+        id: 'resident-1',
+        email: 'morador@consus.com',
+        password: '123456',
+        name: 'Morador Teste',
+        role: 'MORADOR',
+        createdAt: new Date().toISOString()
+      },
+      {
         id: 'collector-1',
-        email: 'joao@coletor.com',
-        password: '123',
-        name: 'João Coletor',
+        email: 'coletor@consus.com',
+        password: '123456',
+        name: 'Carlos Coletor',
         role: 'COLETOR',
         createdAt: new Date().toISOString()
-      };
-      this.saveUser(collector);
+      }
+    ];
+
+    // Se não houver usuários, ou se quisermos garantir que os padrão existam
+    if (existingUsers.length === 0) {
+      defaultUsers.forEach(u => this.saveUser(u));
+    } else {
+      // Garantir que os usuários padrão específicos existam/estejam atualizados
+      defaultUsers.forEach(u => {
+        const exists = existingUsers.some(ex => ex.email === u.email);
+        if (!exists) {
+          this.saveUser(u);
+        }
+      });
     }
   }
 }
