@@ -1,3 +1,8 @@
+'use client';
+
+import { useState, useEffect } from 'react';
+import { RequestRepository } from '@/services/repositories';
+import { CollectionRequest } from '@/lib/types';
 import { motion } from 'framer-motion';
 import { 
   Users, 
