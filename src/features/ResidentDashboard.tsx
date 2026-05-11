@@ -13,18 +13,17 @@ import {
   AlertCircle,
   Package,
   ArrowRight,
-  Leaf
-} from 'lucide-react';
-import styles from './ResidentDashboard.module.css';
-import { motion, AnimatePresence } from 'framer-motion';
-import { 
-  Trophy, 
-  ArrowUpRight, 
-  MessageSquare, 
-  Sparkles, 
+  Leaf,
+  Bell,
+  Trophy,
+  ArrowUpRight,
+  MessageSquare,
+  Sparkles,
   Zap,
   Star
 } from 'lucide-react';
+import styles from './ResidentDashboard.module.css';
+import { motion, AnimatePresence } from 'framer-motion';
 
 const RESIDUE_TYPES: { type: ResidueType; icon: string; label: string; color: string }[] = [
   { type: 'PLASTICO', icon: '🥤', label: 'Plástico', color: '#60a5fa' },
@@ -175,22 +174,15 @@ export default function ResidentDashboard() {
       <div className={styles.mainGrid}>
         <div className={styles.leftCol}>
           <section className={styles.activeSection}>
-              <div className={styles.sectionHeader}>
-                <h3>Painel de Ações</h3>
-                <div className={styles.tabs}>
-                    <button className={styles.activeTab}>Próxima Coleta</button>
-                    <button className={styles.tab}>Histórico</button>
-                </div>
+            <div className={styles.sectionHeader}>
+              <h3>Painel de Ações</h3>
+              <div className={styles.tabs}>
+                  <button className={styles.activeTab}>Próxima Coleta</button>
+                  <button className={styles.tab}>Histórico</button>
               </div>
+            </div>
 
-          {activeRequest ? (
-            <section className={styles.activeSection}>
-              <div className={styles.sectionHeader}>
-                <h3>Próxima Coleta</h3>
-                <span className={`${styles.badge} ${styles[activeRequest.status.toLowerCase()]}`}>
-                  {activeRequest.status}
-                </span>
-              </div>
+            {activeRequest ? (
               <div className={styles.activeCard}>
                 <div className={styles.activeInfo}>
                     <div className={styles.residueIconBig}>
@@ -216,19 +208,19 @@ export default function ResidentDashboard() {
                     </div>
                 </div>
               </div>
-            </section>
-          ) : (
-            <section className={styles.emptyState}>
-              <div className={styles.emptyIcon}>
-                <Leaf size={48} />
-              </div>
-              <h3>Tudo limpo!</h3>
-              <p>Que tal separar algo para reciclar agora?</p>
-              <button className={styles.outlineButton} onClick={() => setIsModalOpen(true)}>
-                Solicitar Coleta
-              </button>
-            </section>
-          )}
+            ) : (
+              <section className={styles.emptyState}>
+                <div className={styles.emptyIcon}>
+                  <Leaf size={48} />
+                </div>
+                <h3>Tudo limpo!</h3>
+                <p>Que tal separar algo para reciclar agora?</p>
+                <button className={styles.outlineButton} onClick={() => setIsModalOpen(true)}>
+                  Solicitar Coleta
+                </button>
+              </section>
+            )}
+          </section>
         </div>
 
         <div className={styles.rightCol}>
