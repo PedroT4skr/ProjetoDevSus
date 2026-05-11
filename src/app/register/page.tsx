@@ -5,6 +5,7 @@ import { useRouter } from 'next/navigation';
 import { useAuth } from '@/contexts/AuthContext';
 import { UserRepository } from '@/services/repositories';
 import { Leaf, User, Mail, Building, ArrowRight, Lock, Truck } from 'lucide-react';
+import { motion, AnimatePresence } from 'framer-motion';
 import styles from './register.module.css';
 import { UserRole } from '@/lib/types';
 
@@ -53,16 +54,43 @@ export default function RegisterPage() {
 
   return (
     <div className={styles.container}>
-      <div className={styles.card}>
+      <motion.div 
+        className={styles.card}
+        initial={{ opacity: 0, y: 20 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.5 }}
+      >
         <div className={styles.header}>
-          <div className={styles.logo}>
+          <motion.div 
+            className={styles.logo}
+            initial={{ scale: 0 }}
+            animate={{ scale: 1 }}
+            transition={{ type: 'spring', damping: 12, stiffness: 200, delay: 0.2 }}
+          >
             <Leaf size={32} color="var(--primary)" />
-          </div>
-          <h1>Criar Conta</h1>
-          <p>Junte-se ao movimento sustentável</p>
+          </motion.div>
+          <motion.h1
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ delay: 0.3 }}
+          >
+            Criar Conta
+          </motion.h1>
+          <motion.p
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ delay: 0.4 }}
+          >
+            Junte-se ao movimento sustentável
+          </motion.p>
         </div>
 
-        <div className={styles.roleToggle}>
+        <motion.div 
+          className={styles.roleToggle}
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ delay: 0.5 }}
+        >
           <button
             type="button"
             className={`${styles.roleButton} ${formData.role === 'MORADOR' ? styles.activeRole : ''}`}
@@ -77,10 +105,15 @@ export default function RegisterPage() {
           >
             <Truck size={18} /> Sou Coletor
           </button>
-        </div>
+        </motion.div>
 
         <form onSubmit={handleSubmit} className={styles.form}>
-          <div className={styles.inputGroup}>
+          <motion.div 
+            className={styles.inputGroup}
+            initial={{ opacity: 0, x: -10 }}
+            animate={{ opacity: 1, x: 0 }}
+            transition={{ delay: 0.6 }}
+          >
             <label>Nome Completo</label>
             <div className={styles.inputWrapper}>
               <User size={20} className={styles.icon} />
@@ -92,9 +125,14 @@ export default function RegisterPage() {
                 required
               />
             </div>
-          </div>
+          </motion.div>
 
-          <div className={styles.inputGroup}>
+          <motion.div 
+            className={styles.inputGroup}
+            initial={{ opacity: 0, x: -10 }}
+            animate={{ opacity: 1, x: 0 }}
+            transition={{ delay: 0.7 }}
+          >
             <label>E-mail</label>
             <div className={styles.inputWrapper}>
               <Mail size={20} className={styles.icon} />
@@ -106,9 +144,14 @@ export default function RegisterPage() {
                 required
               />
             </div>
-          </div>
+          </motion.div>
 
-          <div className={styles.inputGroup}>
+          <motion.div 
+            className={styles.inputGroup}
+            initial={{ opacity: 0, x: -10 }}
+            animate={{ opacity: 1, x: 0 }}
+            transition={{ delay: 0.8 }}
+          >
             <label>Senha</label>
             <div className={styles.inputWrapper}>
               <Lock size={20} className={styles.icon} />
@@ -120,33 +163,59 @@ export default function RegisterPage() {
                 required
               />
             </div>
-          </div>
+          </motion.div>
 
-          {formData.role === 'MORADOR' && (
-            <div className={styles.inputGroup}>
-              <label>Apartamento</label>
-              <div className={styles.inputWrapper}>
-                <Building size={20} className={styles.icon} />
-                <input
-                  type="text"
-                  placeholder="101A"
-                  value={formData.apartment}
-                  onChange={(e) => setFormData({...formData, apartment: e.target.value})}
-                  required
-                />
-              </div>
-            </div>
+          <AnimatePresence mode="wait">
+            {formData.role === 'MORADOR' && (
+              <motion.div 
+                key="apartment-field"
+                className={styles.inputGroup}
+                initial={{ opacity: 0, height: 0, marginBottom: 0 }}
+                animate={{ opacity: 1, height: 'auto', marginBottom: 20 }}
+                exit={{ opacity: 0, height: 0, marginBottom: 0 }}
+                transition={{ type: 'spring', damping: 20, stiffness: 100 }}
+                style={{ overflow: 'hidden' }}
+              >
+                <label>Apartamento</label>
+                <div className={styles.inputWrapper}>
+                  <Building size={20} className={styles.icon} />
+                  <input
+                    type="text"
+                    placeholder="101A"
+                    value={formData.apartment}
+                    onChange={(e) => setFormData({...formData, apartment: e.target.value})}
+                    required
+                  />
+                </div>
+              </motion.div>
+            )}
+          </AnimatePresence>
+
+          {error && (
+            <motion.div 
+              className={styles.error}
+              initial={{ opacity: 0, scale: 0.95 }}
+              animate={{ opacity: 1, scale: 1 }}
+            >
+              {error}
+            </motion.div>
           )}
 
-          {error && <div className={styles.error}>{error}</div>}
-
-          <button type="submit" className={styles.submitButton} disabled={isLoading}>
+          <motion.button 
+            type="submit" 
+            className={styles.submitButton} 
+            disabled={isLoading}
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ delay: 0.9 }}
+            whileTap={{ scale: 0.98 }}
+          >
             {isLoading ? 'Criando...' : (
               <>
                 Cadastrar <ArrowRight size={20} />
               </>
             )}
-          </button>
+          </motion.button>
         </form>
 
         <div className={styles.footer}>
