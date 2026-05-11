@@ -23,9 +23,10 @@ import {
   Star
 } from 'lucide-react';
 import styles from './ResidentDashboard.module.css';
-import TimePicker from 'react-time-picker';
-import 'react-time-picker/dist/TimePicker.css';
-import 'react-clock/dist/Clock.css';
+import Picker from 'react-mobile-picker';
+
+const HOURS = Array.from({ length: 24 }, (_, i) => i.toString().padStart(2, '0'));
+const MINUTES = Array.from({ length: 60 }, (_, i) => i.toString().padStart(2, '0'));
 
 const RESIDUE_TYPES: { type: ResidueType; icon: string; label: string; color: string }[] = [
   { type: 'PLASTICO', icon: '🥤', label: 'Plástico', color: '#60a5fa' },
@@ -42,9 +43,13 @@ export default function ResidentDashboard() {
   const [activeTab, setActiveTab] = useState<'PROXIMA' | 'HISTORICO'>('PROXIMA');
   const [newRequest, setNewRequest] = useState<{
     type: ResidueType | '';
-    time: string;
+    time: { hour: string; minute: string };
     obs: string;
-  }>({ type: '', time: '', obs: '' });
+  }>({
+    type: '',
+    time: { hour: '12', minute: '00' },
+    obs: ''
+  });
 
   const [carouselIndex, setCarouselIndex] = useState(0);
 
@@ -78,12 +83,12 @@ export default function ResidentDashboard() {
       apartment: user.apartment || '',
       residueType: newRequest.type as ResidueType,
       status: 'PENDENTE',
-      availableTime: newRequest.time,
+      availableTime: `${newRequest.time.hour}:${newRequest.time.minute}`,
       observation: newRequest.obs
     });
 
     setIsModalOpen(false);
-    setNewRequest({ type: '', time: '', obs: '' });
+    setNewRequest({ type: '', time: { hour: '12', minute: '00' }, obs: '' });
     loadRequests();
   };
 
@@ -339,16 +344,36 @@ export default function ResidentDashboard() {
                 <div className={styles.formRow}>
                   <div className={styles.formGroup}>
                     <label>Horário de Disponibilidade</label>
-                    <div className={styles.timePickerWrapper}>
-                      <TimePicker
-                        onChange={(val) => setNewRequest({...newRequest, time: val || ''})}
+                    <div className={styles.wheelPickerContainer}>
+                      <Picker
                         value={newRequest.time}
-                        className={styles.timePicker}
-                        clearIcon={null}
-                        clockIcon={<Clock size={18} />}
-                        disableClock={false}
-                        format="HH:mm"
-                      />
+                        onChange={(val) => setNewRequest({...newRequest, time: val})}
+                        className={styles.wheelPicker}
+                      >
+                        <Picker.Column name="hour">
+                          {HOURS.map(h => (
+                            <Picker.Item key={h} value={h}>
+                              {({ selected }) => (
+                                <div className={`${styles.wheelItem} ${selected ? styles.selectedWheelItem : ''}`}>
+                                  {h}
+                                </div>
+                              )}
+                            </Picker.Item>
+                          ))}
+                        </Picker.Column>
+                        <div className={styles.pickerSeparator}>:</div>
+                        <Picker.Column name="minute">
+                          {MINUTES.map(m => (
+                            <Picker.Item key={m} value={m}>
+                              {({ selected }) => (
+                                <div className={`${styles.wheelItem} ${selected ? styles.selectedWheelItem : ''}`}>
+                                  {m}
+                                </div>
+                              )}
+                            </Picker.Item>
+                          ))}
+                        </Picker.Column>
+                      </Picker>
                     </div>
                   </div>
                 </div>
