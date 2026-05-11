@@ -639,119 +639,106 @@
 .dashTitleSkeleton { width: 100px; height: 12px; background: #e2e8f0; border-radius: 6px; }
 .dashUserSkeleton { width: 30px; height: 12px; background: #e2e8f0; border-radius: 6px; }
 
-.appMap {
-  flex: 1;
-  background: #e5e7eb;
-  position: relative;
-  overflow: hidden;
+.mockInterface {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
 }
 
-.mapGrid {
-  position: absolute;
-  inset: 0;
-  background-image: radial-gradient(#94a3b8 1px, transparent 1px);
-  background-size: 20px 20px;
-  opacity: 0.2;
+.mockHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1.5rem;
 }
 
-.mapTruck {
-  position: absolute;
-  width: 24px;
-  height: 24px;
-  background: #10b981;
-  border-radius: 6px;
+.mockHeader strong { font-size: 0.85rem; color: #1e293b; }
+.mockUserIcon { width: 20px; height: 20px; background: #e2e8f0; border-radius: 50%; }
+
+.mockMain {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.mockRequestCard {
+  background: white;
+  padding: 1rem;
+  border-radius: 12px;
+  border: 1px solid #f1f5f9;
+}
+
+.mockRequestCard span {
+  display: block;
+  font-size: 0.65rem;
+  color: #64748b;
+  margin-bottom: 0.75rem;
+  font-weight: 600;
+}
+
+.mockTypeGrid {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.typeCircle {
+  width: 28px;
+  height: 28px;
+  background: #f8fafc;
+  border: 1px solid #e2e8f0;
+  border-radius: 50%;
   display: flex;
   align-items: center;
   justify-content: center;
-  box-shadow: 0 4px 10px rgba(16, 185, 129, 0.4);
-  z-index: 5;
+  color: #94a3b8;
 }
 
-.mapPin {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-}
-
-.pinDot {
-  width: 12px;
-  height: 12px;
-  background: #3b82f6;
-  border-radius: 50%;
-  border: 2px solid white;
-}
-
-.pinPulse {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  width: 30px;
-  height: 30px;
-  background: rgba(59, 130, 246, 0.3);
-  border-radius: 50%;
-  animation: mapPulse 2s infinite;
-}
-
-@keyframes mapPulse {
-  0% { transform: translate(-50%, -50%) scale(0.5); opacity: 1; }
-  100% { transform: translate(-50%, -50%) scale(2); opacity: 0; }
-}
-
-.appOverlay {
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  right: 0;
+.mockStatusCard {
+  background: #ecfdf5;
   padding: 1rem;
+  border-radius: 12px;
+  border: 1px solid rgba(16, 185, 129, 0.2);
 }
 
-.mockCard {
-  background: white;
-  border-radius: 16px;
-  padding: 1rem;
-  box-shadow: 0 10px 15px -3px rgba(0,0,0,0.1);
-}
-
-.mockCardHeader {
+.statusHeader {
   display: flex;
   justify-content: space-between;
+  align-items: center;
   margin-bottom: 0.75rem;
 }
 
-.mockCardHeader strong { font-size: 0.8rem; color: #1e293b; }
-.mockCardHeader span { font-size: 0.7rem; color: #10b981; font-weight: 800; }
+.statusHeader strong { font-size: 0.75rem; color: #065f46; }
+.statusPulse {
+  width: 8px;
+  height: 8px;
+  background: #10b981;
+  border-radius: 50%;
+  animation: pulse 2s infinite;
+}
 
-.mockProgress {
-  height: 6px;
-  background: #f1f5f9;
-  border-radius: 3px;
+@keyframes pulse {
+  0% { transform: scale(1); opacity: 1; }
+  50% { transform: scale(1.5); opacity: 0.5; }
+  100% { transform: scale(1); opacity: 1; }
+}
+
+.statusTimeline {
+  display: flex;
+  align-items: center;
+  gap: 4px;
   margin-bottom: 1rem;
 }
 
-.mockFill {
-  height: 100%;
-  width: 60%;
-  background: #10b981;
-  border-radius: 3px;
-}
+.timeDot { width: 6px; height: 6px; background: #cbd5e1; border-radius: 50%; }
+.timeLine { flex: 1; height: 2px; background: #cbd5e1; }
 
-.mockUser {
+.statusDetails {
   display: flex;
-  align-items: center;
-  gap: 0.75rem;
+  flex-direction: column;
+  gap: 6px;
 }
 
-.mockAvatar {
-  width: 32px;
-  height: 32px;
-  background: #cbd5e1;
-  border-radius: 50%;
-}
-
-.mockText strong { display: block; font-size: 0.75rem; color: #0f172a; }
-.mockText span { font-size: 0.6rem; color: #64748b; }
+.detailSkeleton { height: 6px; background: rgba(16, 185, 129, 0.2); border-radius: 3px; width: 80%; }
 
 /* CTA Final */
 .ctaFinal {

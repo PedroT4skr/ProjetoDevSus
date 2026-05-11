@@ -213,7 +213,7 @@ export default function Home() {
                         <div className={styles.wDot} style={{ background: '#ffbd2e' }} />
                         <div className={styles.wDot} style={{ background: '#27c93f' }} />
                       </div>
-                      <div className={styles.browserAddress}>devsus.com/dashboard</div>
+                      <div className={styles.browserAddress}>devsus.com/resident</div>
                     </div>
                     <div className={styles.dashboardApp}>
                        <div className={styles.dashSidebar}>
@@ -222,48 +222,47 @@ export default function Home() {
                           <div className={styles.sideItem} />
                        </div>
                        <div className={styles.dashContent}>
-                          <div className={styles.dashHeader}>
-                             <div className={styles.dashTitleSkeleton} />
-                             <div className={styles.dashUserSkeleton} />
-                          </div>
-                          <div className={styles.appMap}>
-                             <div className={styles.mapGrid} />
-                             <motion.div 
-                               animate={{ 
-                                 x: [10, 150, 80, 200], 
-                                 y: [20, 40, 120, 60] 
-                               }}
-                               transition={{ duration: 15, repeat: Infinity, ease: "linear" }}
-                               className={styles.mapTruck}
-                             >
-                               <Truck size={14} color="white" />
-                             </motion.div>
-                             <div className={styles.mapPin}>
-                               <div className={styles.pinPulse} />
-                               <div className={styles.pinDot} />
+                          <div className={styles.mockInterface}>
+                             <div className={styles.mockHeader}>
+                                <strong>Minhas Coletas</strong>
+                                <div className={styles.mockUserIcon} />
                              </div>
-                          </div>
-                          <div className={styles.appOverlay}>
-                             <motion.div 
-                               initial={{ y: 50, opacity: 0 }}
-                               whileInView={{ y: 0, opacity: 1 }}
-                               className={styles.mockCard}
-                             >
-                                <div className={styles.mockCardHeader}>
-                                  <strong>Coleta em Rota</strong>
-                                  <span>4 min</span>
-                                </div>
-                                <div className={styles.mockProgress}>
-                                   <div className={styles.mockFill} />
-                                </div>
-                                <div className={styles.mockUser}>
-                                   <div className={styles.mockAvatar} />
-                                   <div className={styles.mockText}>
-                                      <strong>Carlos Silva</strong>
-                                      <span>Coletor Verificado</span>
+                             
+                             <div className={styles.mockMain}>
+                                <motion.div 
+                                  initial={{ opacity: 0, y: 10 }}
+                                  whileInView={{ opacity: 1, y: 0 }}
+                                  className={styles.mockRequestCard}
+                                >
+                                   <span>Selecione o tipo de lixo</span>
+                                   <div className={styles.mockTypeGrid}>
+                                      <div className={styles.typeCircle}><Leaf size={12} /></div>
+                                      <div className={styles.typeCircle}><Zap size={12} /></div>
+                                      <div className={styles.typeCircle}><Shield size={12} /></div>
                                    </div>
-                                </div>
-                             </motion.div>
+                                </motion.div>
+
+                                <motion.div 
+                                  initial={{ opacity: 0, y: 10 }}
+                                  whileInView={{ opacity: 1, y: 0 }}
+                                  transition={{ delay: 0.2 }}
+                                  className={styles.mockStatusCard}
+                                >
+                                   <div className={styles.statusHeader}>
+                                      <strong>Status: Em Rota</strong>
+                                      <div className={styles.statusPulse} />
+                                   </div>
+                                   <div className={styles.statusTimeline}>
+                                      <div className={styles.timeDot} />
+                                      <div className={styles.timeLine} />
+                                      <div className={styles.timeDot} style={{ background: '#10b981' }} />
+                                   </div>
+                                   <div className={styles.statusDetails}>
+                                      <div className={styles.detailSkeleton} />
+                                      <div className={styles.detailSkeleton} style={{ width: '40%' }} />
+                                   </div>
+                                </motion.div>
+                             </div>
                           </div>
                        </div>
                     </div>
