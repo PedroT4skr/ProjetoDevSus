@@ -669,3 +669,71 @@
     grid-template-columns: 1fr;
   }
 }
+
+/* Time Picker Customization */
+.timePickerWrapper {
+  width: 100%;
+}
+
+.timePicker {
+  width: 100% !important;
+  background: #f8fafc;
+  border: 2px solid #f1f5f9;
+  border-radius: 12px;
+  padding: 0.5rem 1rem;
+  transition: all 0.2s ease;
+}
+
+.timePicker:focus-within {
+  border-color: #10b981;
+  background: white;
+  box-shadow: 0 0 0 4px rgba(16, 185, 129, 0.1);
+}
+
+.timePicker :global(.react-time-picker__wrapper) {
+  border: none;
+}
+
+.timePicker :global(.react-time-picker__inputGroup) {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: 'Outfit', sans-serif !important;
+  font-weight: 700;
+  font-size: 1.1rem;
+  color: #1e293b;
+}
+
+.timePicker :global(.react-time-picker__inputGroup__input) {
+  color: #1e293b;
+  outline: none;
+  border: none !important;
+}
+
+.timePicker :global(.react-time-picker__clock-button) {
+  color: #10b981;
+}
+
+.timePicker :global(.react-time-picker__clock) {
+  background: white;
+  border-radius: 16px;
+  box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+  padding: 1rem;
+  border: none;
+}
+
+.timePicker :global(.react-clock) {
+  border: none;
+}
+
+.timePicker :global(.react-clock__face) {
+  border: 2px solid #f1f5f9;
+}
+
+.timePicker :global(.react-clock__hand__body) {
+  background: #10b981;
+}
+
+.timePicker :global(.react-clock__mark__body) {
+  background: #cbd5e1;
+}

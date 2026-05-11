@@ -23,6 +23,9 @@ import {
   Star
 } from 'lucide-react';
 import styles from './ResidentDashboard.module.css';
+import TimePicker from 'react-time-picker';
+import 'react-time-picker/dist/TimePicker.css';
+import 'react-clock/dist/Clock.css';
 
 const RESIDUE_TYPES: { type: ResidueType; icon: string; label: string; color: string }[] = [
   { type: 'PLASTICO', icon: '🥤', label: 'Plástico', color: '#60a5fa' },
@@ -336,12 +339,17 @@ export default function ResidentDashboard() {
                 <div className={styles.formRow}>
                   <div className={styles.formGroup}>
                     <label>Horário de Disponibilidade</label>
-                    <input 
-                      type="time" 
-                      className={styles.input}
-                      value={newRequest.time}
-                      onChange={e => setNewRequest({...newRequest, time: e.target.value})}
-                    />
+                    <div className={styles.timePickerWrapper}>
+                      <TimePicker
+                        onChange={(val) => setNewRequest({...newRequest, time: val || ''})}
+                        value={newRequest.time}
+                        className={styles.timePicker}
+                        clearIcon={null}
+                        clockIcon={<Clock size={18} />}
+                        disableClock={false}
+                        format="HH:mm"
+                      />
+                    </div>
                   </div>
                 </div>
 
