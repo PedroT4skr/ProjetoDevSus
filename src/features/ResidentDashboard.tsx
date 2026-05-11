@@ -346,34 +346,20 @@ export default function ResidentDashboard() {
                     <label>Horário de Disponibilidade</label>
                     <div className={styles.wheelPickerContainer}>
                       <Picker
-                        value={newRequest.time}
-                        onChange={(val) => setNewRequest({...newRequest, time: val})}
-                        className={styles.wheelPicker}
-                      >
-                        <Picker.Column name="hour">
-                          {HOURS.map(h => (
-                            <Picker.Item key={h} value={h}>
-                              {({ selected }) => (
-                                <div className={`${styles.wheelItem} ${selected ? styles.selectedWheelItem : ''}`}>
-                                  {h}
-                                </div>
-                              )}
-                            </Picker.Item>
-                          ))}
-                        </Picker.Column>
-                        <div className={styles.pickerSeparator}>:</div>
-                        <Picker.Column name="minute">
-                          {MINUTES.map(m => (
-                            <Picker.Item key={m} value={m}>
-                              {({ selected }) => (
-                                <div className={`${styles.wheelItem} ${selected ? styles.selectedWheelItem : ''}`}>
-                                  {m}
-                                </div>
-                              )}
-                            </Picker.Item>
-                          ))}
-                        </Picker.Column>
-                      </Picker>
+                        optionGroups={{
+                          hour: HOURS,
+                          minute: MINUTES
+                        }}
+                        valueGroups={newRequest.time}
+                        onChange={(name, value) => {
+                          setNewRequest({
+                            ...newRequest,
+                            time: { ...newRequest.time, [name]: value as string }
+                          });
+                        }}
+                        itemHeight={44}
+                        height={180}
+                      />
                     </div>
                   </div>
                 </div>
