@@ -48,7 +48,7 @@ export default function ResidentDashboard() {
   useEffect(() => {
     const timer = setInterval(() => {
       setCarouselIndex(prev => (prev + 1) % 2);
-    }, 5000);
+    }, 10000);
     return () => clearInterval(timer);
   }, []);
 
@@ -167,20 +167,35 @@ export default function ResidentDashboard() {
             {carouselIndex === 0 ? (
               <motion.div 
                 key="impact"
-                initial={{ opacity: 0, x: 20 }}
-                animate={{ opacity: 1, x: 0 }}
-                exit={{ opacity: 0, x: -20 }}
+                initial={{ opacity: 0, scale: 0.95 }}
+                animate={{ opacity: 1, scale: 1 }}
+                exit={{ opacity: 0, scale: 0.95 }}
                 className={styles.carouselContent}
               >
                 <div className={styles.impactHeader}>
-                  <Star size={24} className={styles.impactIcon} />
-                  <h4>EcoImpacto</h4>
+                  <div className={styles.impactIconBox}><Star size={20} /></div>
+                  <h4>Seu EcoImpacto</h4>
                 </div>
                 <div className={styles.impactMain}>
-                  <div className={styles.impactValue}>12.4kg</div>
+                  <motion.div 
+                    initial={{ y: 10, opacity: 0 }}
+                    animate={{ y: 0, opacity: 1 }}
+                    transition={{ delay: 0.2 }}
+                    className={styles.impactValue}
+                  >
+                    12.4<span>kg</span>
+                  </motion.div>
                   <p>CO2 evitado este mês</p>
                 </div>
-                <div className={styles.impactBadge}>Equivalente a 5 árvores plantadas 🌳</div>
+                <div className={styles.impactFooter}>
+                  <div className={styles.treeProgress}>
+                    <div className={styles.treeIcon}>🌳</div>
+                    <div className={styles.treeText}>
+                       <strong>5 Árvores</strong>
+                       <span>Salvas pela sua ação</span>
+                    </div>
+                  </div>
+                </div>
               </motion.div>
             ) : (
               <motion.div 
