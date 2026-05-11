@@ -1,4 +1,4 @@
-import { User, CollectionRequest, Schedule } from '../types';
+import { User, CollectionRequest } from '../types';
 
 const STORAGE_KEYS = {
   USERS: 'devsus_users',

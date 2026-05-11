@@ -4,7 +4,7 @@ import { useState } from 'react';
 import { useRouter } from 'next/navigation';
 import { useAuth } from '@/contexts/AuthContext';
 import { UserRepository } from '@/services/repositories';
-import { Leaf, User, Mail, Lock, Building, ArrowRight } from 'lucide-react';
+import { Leaf, User, Mail, Building, ArrowRight } from 'lucide-react';
 import styles from './register.module.css';
 import { UserRole } from '@/lib/types';
 
@@ -43,7 +43,7 @@ export default function RegisterPage() {
       await UserRepository.create(newUser);
       login(newUser);
       router.push('/dashboard');
-    } catch (err) {
+    } catch {
       setError('Erro ao criar conta.');
     } finally {
       setIsLoading(false);

@@ -32,7 +32,7 @@ export default function LoginPage() {
       } else {
         setError('Usuário não encontrado. Experimente: admin@devsus.com ou joao@coletor.com');
       }
-    } catch (err) {
+    } catch {
       setError('Ocorreu um erro ao tentar entrar.');
     } finally {
       setIsLoading(false);

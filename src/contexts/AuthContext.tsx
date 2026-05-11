@@ -14,14 +14,17 @@ interface AuthContextType {
 const AuthContext = createContext<AuthContextType | undefined>(undefined);
 
 export function AuthProvider({ children }: { children: React.ReactNode }) {
-  const [user, setUser] = useState<User | null>(null);
-  const [loading, setLoading] = useState(true);
+  const [user, setUser] = useState<User | null>(() => {
+    if (typeof window !== 'undefined') {
+      db.seed();
+      return db.getLoggedUser();
+    }
+    return null;
+  });
 
   useEffect(() => {
-    db.seed(); // Garantir dados iniciais
-    const savedUser = db.getLoggedUser();
-    setUser(savedUser);
-    setLoading(false);
+    // Apenas garante que o seed rode se não rodou no initializer
+    db.seed();
   }, []);
 
   const login = (userData: User) => {
