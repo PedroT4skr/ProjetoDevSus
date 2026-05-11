@@ -104,33 +104,6 @@ class MockDatabase {
         }
       });
     }
-
-    // Seed de solicitações se estiver vazio
-    if (this.getRequests().length === 0) {
-      const mockRequests: CollectionRequest[] = [
-        // Coletas em andamento
-        { id: 'req-1', residentId: 'res-1', apartment: '101', residueType: 'PLASTICO', status: 'EM_ROTA', createdAt: new Date(Date.now() - 1000 * 60 * 30).toISOString(), collectorId: 'collector-1' },
-        { id: 'req-2', residentId: 'res-2', apartment: '502', residueType: 'PAPEL', status: 'EM_ROTA', createdAt: new Date(Date.now() - 1000 * 60 * 45).toISOString(), collectorId: 'collector-2' },
-        
-        // Pendentes (Atividade recente)
-        { id: 'req-3', residentId: 'res-3', apartment: '1204', residueType: 'VIDRO', status: 'PENDENTE', createdAt: new Date(Date.now() - 1000 * 60 * 5).toISOString() },
-        { id: 'req-4', residentId: 'res-4', apartment: '302', residueType: 'METAL', status: 'PENDENTE', createdAt: new Date(Date.now() - 1000 * 60 * 12).toISOString() },
-        { id: 'req-5', residentId: 'res-5', apartment: '805', residueType: 'ORGANICO', status: 'PENDENTE', createdAt: new Date(Date.now() - 1000 * 60 * 20).toISOString() },
-        
-        // Histórico (Total de coletas)
-        ...Array.from({ length: 37 }).map((_, i) => ({
-          id: `old-req-${i}`,
-          residentId: `res-${i % 5}`,
-          apartment: `${100 + i}`,
-          residueType: ['PLASTICO', 'PAPEL', 'VIDRO', 'METAL'][i % 4] as any,
-          status: 'CONCLUIDO' as const,
-          createdAt: new Date(Date.now() - 1000 * 60 * 60 * 24 * (i + 1)).toISOString(),
-          collectorId: 'collector-1'
-        }))
-      ];
-      
-      mockRequests.forEach(r => this.saveRequest(r));
-    }
   }
 }
 

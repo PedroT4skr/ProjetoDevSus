@@ -225,18 +225,3 @@
   background: linear-gradient(135deg, #2563eb 0%, #1d4ed8 100%);
   box-shadow: 0 4px 10px rgba(37, 99, 235, 0.3);
 }
-
-/* Admin Theme Overrides (Yellow) */
-.adminTheme .activeNavItem {
-  background: rgba(234, 179, 8, 0.1);
-  color: #eab308;
-}
-
-.adminTheme .activeNavItem::before {
-  background: #eab308;
-}
-
-.adminTheme .sidebarAvatar {
-  background: linear-gradient(135deg, #facc15 0%, #eab308 100%);
-  box-shadow: 0 4px 10px rgba(234, 179, 8, 0.3);
-}
