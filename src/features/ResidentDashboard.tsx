@@ -234,6 +234,13 @@ export default function ResidentDashboard() {
             >
               <Sparkles size={28} />
             </motion.div>
+            <motion.div 
+              className={styles.compIcon5}
+              animate={{ y: [0, -12, 0] }}
+              transition={{ duration: 4.8, repeat: Infinity, ease: "easeInOut", delay: 2 }}
+            >
+              <Zap size={24} />
+            </motion.div>
             <div className={styles.compCircle}></div>
           </div>
         </section>
