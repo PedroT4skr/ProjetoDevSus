@@ -23,7 +23,6 @@ import {
   Star
 } from 'lucide-react';
 import styles from './ResidentDashboard.module.css';
-import { motion, AnimatePresence } from 'framer-motion';
 
 const RESIDUE_TYPES: { type: ResidueType; icon: string; label: string; color: string }[] = [
   { type: 'PLASTICO', icon: '🥤', label: 'Plástico', color: '#60a5fa' },
