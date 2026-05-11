@@ -89,20 +89,63 @@ export default function Home() {
                   <div className={styles.cardDot} style={{ background: '#ff5f56' }} />
                   <div className={styles.cardDot} style={{ background: '#ffbd2e' }} />
                   <div className={styles.cardDot} style={{ background: '#27c93f' }} />
+                  <span className={styles.cardTitle}>Impacto Global</span>
                 </div>
                 <div className={styles.cardBody}>
-                  <div className={styles.statsPreview}>
-                    <div className={styles.statLine}>
-                      <span>Impacto Mensal</span>
-                      <strong>+2.4 tons</strong>
+                  <div className={styles.mainImpact}>
+                    <div className={styles.impactLabel}>Redução de CO₂</div>
+                    <div className={styles.impactValueContainer}>
+                      <motion.span 
+                        initial={{ opacity: 0 }}
+                        animate={{ opacity: 1 }}
+                        className={styles.bigValue}
+                      >
+                        +2.4
+                      </motion.span>
+                      <span className={styles.unit}>tons</span>
                     </div>
                     <div className={styles.progressLine}>
-                      <div className={styles.fill} style={{ width: '70%' }} />
+                      <motion.div 
+                        initial={{ width: 0 }}
+                        animate={{ width: '75%' }}
+                        transition={{ duration: 2, ease: "easeOut" }}
+                        className={styles.fill} 
+                      />
                     </div>
                   </div>
+
+                  <div className={styles.miniStats}>
+                    <div className={styles.mStat}>
+                      <div className={styles.mIcon} style={{ color: '#60a5fa' }}><Globe size={14} /></div>
+                      <div className={styles.mInfo}>
+                        <strong>12.4k</strong>
+                        <span>Litros d'água</span>
+                      </div>
+                    </div>
+                    <div className={styles.mStat}>
+                      <div className={styles.mIcon} style={{ color: '#10b981' }}><Leaf size={14} /></div>
+                      <div className={styles.mInfo}>
+                        <strong>84</strong>
+                        <span>Árvores salvas</span>
+                      </div>
+                    </div>
+                  </div>
+
                   <div className={styles.floatingBadges}>
-                    <div className={styles.fBadge}><Zap size={14} /> Logística Real-time</div>
-                    <div className={styles.fBadge}><Shield size={14} /> 100% Seguro</div>
+                    <motion.div 
+                      animate={{ y: [0, -5, 0] }}
+                      transition={{ duration: 3, repeat: Infinity }}
+                      className={styles.fBadge}
+                    >
+                      <Zap size={14} className={styles.pulseIcon} /> Logística Real-time
+                    </motion.div>
+                    <motion.div 
+                      animate={{ y: [0, 5, 0] }}
+                      transition={{ duration: 4, repeat: Infinity, delay: 0.5 }}
+                      className={styles.fBadge}
+                    >
+                      <Shield size={14} /> 100% Seguro
+                    </motion.div>
                   </div>
                 </div>
               </div>

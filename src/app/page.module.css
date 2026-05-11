@@ -226,24 +226,108 @@
 
 .cardHeader {
   display: flex;
+  align-items: center;
   gap: 6px;
   margin-bottom: 2rem;
 }
 
 .cardDot {
-  width: 12px;
-  height: 12px;
+  width: 10px;
+  height: 10px;
   border-radius: 50%;
 }
 
-.statLine {
-  display: flex;
-  justify-content: space-between;
-  margin-bottom: 0.75rem;
+.cardTitle {
+  margin-left: auto;
+  font-size: 0.7rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  color: #94a3b8;
+  letter-spacing: 0.1em;
 }
 
-.statLine span { font-weight: 600; color: #64748b; font-size: 0.9rem; }
-.statLine strong { font-weight: 800; color: #0f172a; }
+.mainImpact {
+  margin-bottom: 2rem;
+}
+
+.impactLabel {
+  font-size: 0.85rem;
+  font-weight: 700;
+  color: #64748b;
+  margin-bottom: 0.5rem;
+}
+
+.impactValueContainer {
+  display: flex;
+  align-items: baseline;
+  gap: 0.4rem;
+  margin-bottom: 1rem;
+}
+
+.bigValue {
+  font-size: 3rem;
+  font-weight: 900;
+  color: #0f172a;
+  letter-spacing: -0.04em;
+}
+
+.unit {
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: #94a3b8;
+}
+
+.miniStats {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem;
+  margin-bottom: 2.5rem;
+}
+
+.mStat {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0.75rem;
+  background: rgba(255, 255, 255, 0.5);
+  border-radius: 12px;
+}
+
+.mIcon {
+  width: 32px;
+  height: 32px;
+  background: white;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+}
+
+.mInfo strong {
+  display: block;
+  font-size: 0.9rem;
+  font-weight: 800;
+  color: #1e293b;
+  line-height: 1;
+}
+
+.mInfo span {
+  font-size: 0.65rem;
+  font-weight: 700;
+  color: #64748b;
+}
+
+.pulseIcon {
+  color: #f59e0b;
+  animation: iconPulse 2s infinite;
+}
+
+@keyframes iconPulse {
+  0% { transform: scale(1); opacity: 1; }
+  50% { transform: scale(1.2); opacity: 0.7; }
+  100% { transform: scale(1); opacity: 1; }
+}
 
 .progressLine {
   height: 10px;
