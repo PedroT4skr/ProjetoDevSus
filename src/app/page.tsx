@@ -1,3 +1,4 @@
+import Link from "next/link";
 import styles from "./page.module.css";
 
 export default function Home() {
@@ -13,12 +14,12 @@ export default function Home() {
         </p>
         
         <div className={styles.actions}>
-          <button className={styles.primaryButton}>Começar Agora</button>
-          <button className={styles.secondaryButton}>Saiba Mais</button>
+          <Link href="/register" className={styles.primaryButton}>Começar Agora</Link>
+          <Link href="#features" className={styles.secondaryButton}>Saiba Mais</Link>
         </div>
       </div>
       
-      <div className={styles.grid}>
+      <div id="features" className={styles.grid}>
         <div className={styles.card}>
           <h3>Moradores</h3>
           <p>Solicite coletas em segundos e acompanhe o status em tempo real.</p>
