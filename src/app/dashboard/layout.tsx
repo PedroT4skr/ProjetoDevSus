@@ -11,9 +11,7 @@ import {
   Leaf,
   Bell,
   Menu,
-  X,
-  Users,
-  Truck
+  X
 } from 'lucide-react';
 import { useState } from 'react';
 import styles from './dashboard.module.css';
@@ -38,26 +36,11 @@ export default function DashboardLayout({
     return <div className={styles.loading}>Carregando...</div>;
   }
 
-  const getNavItems = () => {
-    const common = [{ label: 'Perfil', icon: User, href: '/dashboard/profile' }];
-    
-    if (user.role === 'ADMIN') {
-      return [
-        { label: 'Início', icon: LayoutDashboard, href: '/dashboard' },
-        { label: 'Moradores', icon: Users, href: '/dashboard/residents' },
-        { label: 'Coletores', icon: Truck, href: '/dashboard/collectors' },
-        ...common
-      ];
-    }
-
-    return [
-      { label: 'Início', icon: LayoutDashboard, href: '/dashboard' },
-      { label: 'Histórico', icon: History, href: '/dashboard/history' },
-      ...common
-    ];
-  };
-
-  const navItems = getNavItems();
+  const navItems = [
+    { label: 'Início', icon: LayoutDashboard, href: '/dashboard' },
+    { label: 'Histórico', icon: History, href: '/dashboard/history' },
+    { label: 'Perfil', icon: User, href: '/dashboard/profile' },
+  ];
 
   return (
     <div className={`${styles.container} ${user.role === 'COLETOR' ? styles.collectorTheme : ''}`}>
