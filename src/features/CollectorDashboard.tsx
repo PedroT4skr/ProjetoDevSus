@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useCallback } from 'react';
 import { useAuth } from '@/contexts/AuthContext';
 import { RequestRepository } from '@/services/repositories';
 import { CollectionRequest } from '@/lib/types';
@@ -19,25 +19,22 @@ export default function CollectorDashboard() {
   const [pendingRequests, setPendingRequests] = useState<CollectionRequest[]>([]);
   const [myTasks, setMyTasks] = useState<CollectionRequest[]>([]);
 
-  useEffect(() => {
-    let isMounted = true;
-    const loadData = async () => {
-      if (!user) return;
-      const pending = await RequestRepository.getPending();
-      const tasks = await RequestRepository.getByCollector(user.id);
-      if (isMounted) {
-        setPendingRequests(pending);
-        setMyTasks(tasks.filter(t => t.status === 'EM_ROTA'));
-      }
-    };
-
-    loadData();
-    const interval = setInterval(loadData, 10000);
-    return () => {
-      isMounted = false;
-      clearInterval(interval);
-    };
+  const loadData = useCallback(async () => {
+    if (!user) return;
+    const pending = await RequestRepository.getPending();
+    const tasks = await RequestRepository.getByCollector(user.id);
+    setPendingRequests(pending);
+    setMyTasks(tasks.filter(t => t.status === 'EM_ROTA'));
   }, [user]);
+
+  useEffect(() => {
+    const init = async () => {
+      await loadData();
+    };
+    init();
+    const interval = setInterval(loadData, 10000);
+    return () => clearInterval(interval);
+  }, [loadData]);
 
   const handleAccept = async (id: string) => {
     if (!user) return;
