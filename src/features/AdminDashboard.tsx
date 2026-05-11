@@ -144,7 +144,7 @@ export default function AdminDashboard() {
                       <div className={styles.activityInfo}>
                         <p><strong>Apto {req.apartment}</strong> solicitou {req.residueType.toLowerCase()}</p>
                         <div className={styles.activityMeta}>
-                          <span>{new Date(req.createdAt).toLocaleTimeString([], { hour: '2d', minute: '2d' })}</span>
+                          <span>{new Date(req.createdAt).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}</span>
                           <span className={styles.statusTag} data-status={req.status}>
                             {req.status === 'PENDENTE' ? 'Pendente' : 'Em Rota'}
                           </span>
