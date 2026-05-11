@@ -11,7 +11,9 @@ import {
   Leaf,
   Bell,
   Menu,
-  X
+  X,
+  Users,
+  Truck
 } from 'lucide-react';
 import { useState } from 'react';
 import styles from './dashboard.module.css';
@@ -38,6 +40,10 @@ export default function DashboardLayout({
 
   const navItems = [
     { label: 'Início', icon: LayoutDashboard, href: '/dashboard' },
+    ...(user.role === 'ADMIN' ? [
+      { label: 'Moradores', icon: Users, href: '/dashboard/residents' },
+      { label: 'Coletores', icon: Truck, href: '/dashboard/collectors' },
+    ] : []),
     { label: 'Histórico', icon: History, href: '/dashboard/history' },
     { label: 'Perfil', icon: User, href: '/dashboard/profile' },
   ];
