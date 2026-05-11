@@ -22,9 +22,16 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
     return null;
   });
 
+  const [loading, setLoading] = useState(true);
+
   useEffect(() => {
-    // Apenas garante que o seed rode se não rodou no initializer
-    db.seed();
+    const init = () => {
+      db.seed();
+      const savedUser = db.getLoggedUser();
+      setUser(savedUser);
+      setLoading(false);
+    };
+    init();
   }, []);
 
   const login = (userData: User) => {
