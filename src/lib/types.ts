@@ -7,6 +7,7 @@ export type RequestStatus = 'PENDENTE' | 'EM_ROTA' | 'COLETADO' | 'CANCELADO';
 export interface User {
   id: string;
   email: string;
+  password?: string;
   name: string;
   role: UserRole;
   apartment?: string;

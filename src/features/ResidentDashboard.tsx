@@ -16,6 +16,7 @@ import {
   Leaf
 } from 'lucide-react';
 import styles from './ResidentDashboard.module.css';
+import Image from 'next/image';
 
 const RESIDUE_TYPES: { type: ResidueType; icon: string; label: string; color: string }[] = [
   { type: 'PLASTICO', icon: '🥤', label: 'Plástico', color: '#60a5fa' },
@@ -72,82 +73,130 @@ export default function ResidentDashboard() {
   return (
     <div className={styles.container}>
       <header className={styles.header}>
-        <div>
-          <h2>Olá, {user?.name.split(' ')[0]} 👋</h2>
-          <p>Como está o descarte hoje?</p>
+        <div className={styles.welcomeInfo}>
+          <h2>Olá, {user?.name.split(' ')[0]}! 👋</h2>
+          <p>Seu condomínio já reciclagem <strong>128kg</strong> este mês.</p>
         </div>
-        <button className={styles.addButton} onClick={() => setIsModalOpen(true)}>
-          <Plus size={20} /> Nova Solicitação
-        </button>
       </header>
+
+      <section className={styles.heroCard}>
+        <div className={styles.heroContent}>
+          <h3>Facilite seu descarte</h3>
+          <p>Solicite a coleta de recicláveis sem sair de casa e ajude o planeta.</p>
+          <button className={styles.ctaButton} onClick={() => setIsModalOpen(true)}>
+            <Plus size={20} /> Nova Solicitação
+          </button>
+        </div>
+        <div className={styles.heroImage}>
+          <Image 
+            src="/resident_hero_illustration_1778528148225.png" 
+            alt="Reciclagem" 
+            width={200} 
+            height={200} 
+            className={styles.illustration}
+          />
+        </div>
+      </section>
 
       <section className={styles.stats}>
         <div className={styles.statCard}>
-          <div className={styles.statIcon} style={{ background: '#d1fae5', color: '#059669' }}>
+          <div className={styles.statIcon} style={{ background: '#ecfdf5', color: '#10b981' }}>
             <CheckCircle2 size={24} />
           </div>
-          <div>
+          <div className={styles.statData}>
             <h3>{requests.filter(r => r.status === 'COLETADO').length}</h3>
-            <p>Coletas Realizadas</p>
+            <p>Concluídas</p>
           </div>
         </div>
         <div className={styles.statCard}>
-          <div className={styles.statIcon} style={{ background: '#fef3c7', color: '#d97706' }}>
+          <div className={styles.statIcon} style={{ background: '#fffbeb', color: '#f59e0b' }}>
             <Clock size={24} />
           </div>
-          <div>
+          <div className={styles.statData}>
             <h3>{requests.filter(r => r.status === 'PENDENTE' || r.status === 'EM_ROTA').length}</h3>
-            <p>Em Andamento</p>
+            <p>Em progresso</p>
           </div>
         </div>
       </section>
 
-      {activeRequest ? (
-        <section className={styles.activeSection}>
-          <div className={styles.sectionHeader}>
-            <h3>Próxima Coleta</h3>
-            <span className={`${styles.badge} ${styles[activeRequest.status.toLowerCase()]}`}>
-              {activeRequest.status}
-            </span>
-          </div>
-          <div className={styles.activeCard}>
-             <div className={styles.activeInfo}>
-                <div className={styles.residueIconBig}>
-                  {RESIDUE_TYPES.find(t => t.type === activeRequest.residueType)?.icon}
+      <div className={styles.mainGrid}>
+        <div className={styles.leftCol}>
+
+          {activeRequest ? (
+            <section className={styles.activeSection}>
+              <div className={styles.sectionHeader}>
+                <h3>Próxima Coleta</h3>
+                <span className={`${styles.badge} ${styles[activeRequest.status.toLowerCase()]}`}>
+                  {activeRequest.status}
+                </span>
+              </div>
+              <div className={styles.activeCard}>
+                <div className={styles.activeInfo}>
+                    <div className={styles.residueIconBig}>
+                      {RESIDUE_TYPES.find(t => t.type === activeRequest.residueType)?.icon}
+                    </div>
+                    <div>
+                      <h4>{activeRequest.residueType}</h4>
+                      <p><Clock size={14} /> Disponível às: {activeRequest.availableTime}</p>
+                    </div>
                 </div>
-                <div>
-                  <h4>{activeRequest.residueType}</h4>
-                  <p><Clock size={14} /> Disponível às: {activeRequest.availableTime}</p>
+                <div className={styles.steps}>
+                    <div className={`${styles.step} ${styles.active}`}>
+                      <div className={styles.stepCircle}><CheckCircle2 size={16} /></div>
+                      <span>Solicitado</span>
+                    </div>
+                    <div className={`${styles.step} ${activeRequest.status === 'EM_ROTA' ? styles.active : ''}`}>
+                      <div className={styles.stepCircle}><Package size={16} /></div>
+                      <span>Em Rota</span>
+                    </div>
+                    <div className={styles.step}>
+                      <div className={styles.stepCircle}><Trash2 size={16} /></div>
+                      <span>Coletado</span>
+                    </div>
                 </div>
-             </div>
-             <div className={styles.steps}>
-                <div className={`${styles.step} ${styles.active}`}>
-                  <div className={styles.stepCircle}><CheckCircle2 size={16} /></div>
-                  <span>Solicitado</span>
-                </div>
-                <div className={`${styles.step} ${activeRequest.status === 'EM_ROTA' ? styles.active : ''}`}>
-                  <div className={styles.stepCircle}><Package size={16} /></div>
-                  <span>Em Rota</span>
-                </div>
-                <div className={styles.step}>
-                  <div className={styles.stepCircle}><Trash2 size={16} /></div>
-                  <span>Coletado</span>
-                </div>
-             </div>
-          </div>
-        </section>
-      ) : (
-        <section className={styles.emptyState}>
-          <div className={styles.emptyIcon}>
-            <Leaf size={48} />
-          </div>
-          <h3>Tudo limpo por aqui!</h3>
-          <p>Sua lixeira está vazia. Que tal separar algo para reciclar?</p>
-          <button className={styles.outlineButton} onClick={() => setIsModalOpen(true)}>
-            Solicitar Agora
-          </button>
-        </section>
-      )}
+              </div>
+            </section>
+          ) : (
+            <section className={styles.emptyState}>
+              <div className={styles.emptyIcon}>
+                <Leaf size={48} />
+              </div>
+              <h3>Tudo limpo!</h3>
+              <p>Que tal separar algo para reciclar agora?</p>
+              <button className={styles.outlineButton} onClick={() => setIsModalOpen(true)}>
+                Solicitar Coleta
+              </button>
+            </section>
+          )}
+        </div>
+
+        <div className={styles.rightCol}>
+          <section className={styles.tipsSection}>
+            <h3>Dicas de Reciclagem</h3>
+            <div className={styles.tipCard}>
+              <div className={styles.tipIcon}>💡</div>
+              <div className={styles.tipText}>
+                <h4>Lave as embalagens</h4>
+                <p>Retirar restos de comida ajuda a manter o valor do material reciclável.</p>
+              </div>
+            </div>
+            <div className={styles.tipCard}>
+              <div className={styles.tipIcon}>📦</div>
+              <div className={styles.tipText}>
+                <h4>Compacte caixas</h4>
+                <p>Desmontar caixas de papelão economiza espaço e facilita o transporte.</p>
+              </div>
+            </div>
+          </section>
+
+          <section className={styles.impactCard}>
+            <div className={styles.impactIcon}><Leaf size={24} /></div>
+            <h4>Seu Impacto</h4>
+            <div className={styles.impactValue}>12.4kg</div>
+            <p>CO2 evitado este mês</p>
+          </section>
+        </div>
+      </div>
 
       {/* Modal de Solicitação */}
       <AnimatePresence>

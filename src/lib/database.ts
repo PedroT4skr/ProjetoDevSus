@@ -66,6 +66,7 @@ class MockDatabase {
       const admin: User = {
         id: 'admin-1',
         email: 'admin@devsus.com',
+        password: 'admin',
         name: 'Administrador Sistema',
         role: 'ADMIN',
         createdAt: new Date().toISOString()
@@ -75,6 +76,7 @@ class MockDatabase {
       const collector: User = {
         id: 'collector-1',
         email: 'joao@coletor.com',
+        password: '123',
         name: 'João Coletor',
         role: 'COLETOR',
         createdAt: new Date().toISOString()
