@@ -3,7 +3,7 @@ import "./globals.css";
 import { AuthProvider } from "@/contexts/AuthContext";
 
 export const metadata: Metadata = {
-  title: "DevSus | Coleta Sustentável",
+  title: "Consus | Coleta Sustentável",
   description: "Sistema inteligente de coleta seletiva para condomínios.",
 };
 

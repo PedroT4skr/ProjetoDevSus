@@ -1,4 +1,4 @@
-# DevSus - Sistema de Coleta Sustentável
+# Consus - Sistema de Coleta Sustentável
 
 Plataforma premium para gestão de coleta seletiva em condomínios.
 

@@ -46,7 +46,7 @@ export default function LoginPage() {
           <div className={styles.logo}>
             <Leaf size={32} color="var(--primary)" />
           </div>
-          <h1>Bem-vindo ao DevSus</h1>
+          <h1>Bem-vindo ao Consus</h1>
           <p>Entre na sua conta para gerenciar suas coletas</p>
         </div>
 

@@ -1,10 +1,10 @@
 import { User, CollectionRequest } from '../types';
 
 const STORAGE_KEYS = {
-  USERS: 'devsus_users',
-  REQUESTS: 'devsus_requests',
-  SCHEDULES: 'devsus_schedules',
-  LOGGED_USER: 'devsus_auth_user'
+  USERS: 'consus_users',
+  REQUESTS: 'consus_requests',
+  SCHEDULES: 'consus_schedules',
+  LOGGED_USER: 'consus_auth_user'
 };
 
 class MockDatabase {
@@ -65,7 +65,7 @@ class MockDatabase {
     if (this.getUsers().length === 0) {
       const admin: User = {
         id: 'admin-1',
-        email: 'admin@devsus.com',
+        email: 'admin@consus.com',
         password: 'admin',
         name: 'Administrador Sistema',
         role: 'ADMIN',

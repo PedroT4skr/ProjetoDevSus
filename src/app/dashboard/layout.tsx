@@ -48,7 +48,7 @@ export default function DashboardLayout({
       <aside className={styles.sidebar}>
         <div className={styles.logo}>
           <Leaf size={32} color={user.role === 'COLETOR' ? '#2563eb' : '#10b981'} />
-          <span>DevSus</span>
+          <span>Consus</span>
         </div>
 
         <nav className={styles.nav}>

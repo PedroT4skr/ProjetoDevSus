@@ -25,7 +25,7 @@ export default function Home() {
         <div className={styles.navContainer}>
           <div className={styles.logo}>
             <Leaf className={styles.logoIcon} />
-            <span>DevSus</span>
+            <span>Consus</span>
           </div>
           <div className={styles.navLinks}>
             <Link href="#features">Recursos</Link>
@@ -56,7 +56,7 @@ export default function Home() {
                 A revolução da <span className={styles.textGradient}>coleta seletiva</span> no seu condomínio.
               </h1>
               <p className={styles.heroSub}>
-                O DevSus conecta moradores e coletores em uma plataforma inteligente, 
+                O Consus conecta moradores e coletores em uma plataforma inteligente, 
                 transformando resíduos em impacto positivo através de logística otimizada 
                 e gamificação da sustentabilidade.
               </p>
@@ -194,7 +194,7 @@ export default function Home() {
         <section id="how-it-works" className={styles.howSection}>
           <div className={styles.howContainer}>
             <div className={styles.howInfo}>
-              <h3>Como funciona o ecossistema DevSus?</h3>
+              <h3>Como funciona o ecossistema Consus?</h3>
               <p>Uma jornada simples para um impacto extraordinário na forma como lidamos com nossos resíduos diários.</p>
               
               <div className={styles.stepsList}>
@@ -213,7 +213,7 @@ export default function Home() {
                         <div className={styles.wDot} style={{ background: '#ffbd2e' }} />
                         <div className={styles.wDot} style={{ background: '#27c93f' }} />
                       </div>
-                      <div className={styles.browserAddress}>devsus.com/resident</div>
+                      <div className={styles.browserAddress}>consus.com/resident</div>
                     </div>
                     <div className={styles.dashboardApp}>
                        <div className={styles.dashSidebar}>
@@ -276,7 +276,7 @@ export default function Home() {
         <section className={styles.ctaFinal}>
           <div className={styles.ctaContent}>
             <h2>Pronto para transformar seu condomínio?</h2>
-            <p>Junte-se a centenas de pessoas que já estão revolucionando a gestão de resíduos com o DevSus.</p>
+            <p>Junte-se a centenas de pessoas que já estão revolucionando a gestão de resíduos com o Consus.</p>
             <Link href="/register" className={styles.footerCta}>
               Começar Agora Gratuitamente
             </Link>
@@ -289,7 +289,7 @@ export default function Home() {
           <div className={styles.footerBrand}>
             <div className={styles.logo}>
               <Leaf size={24} />
-              <span>DevSus</span>
+              <span>Consus</span>
             </div>
             <p>Tecnologia a serviço do meio ambiente. Criando cidades mais inteligentes e sustentáveis, uma coleta por vez.</p>
           </div>
@@ -307,12 +307,12 @@ export default function Home() {
           </div>
           <div className={styles.footerLinks}>
             <h4>Contato</h4>
-            <Link href="mailto:contato@devsus.com">contato@devsus.com</Link>
+            <Link href="mailto:contato@consus.com">contato@consus.com</Link>
             <p>+55 (11) 9999-9999</p>
           </div>
         </div>
         <div className={styles.footerBottom}>
-          <p>© 2026 DevSus. Todos os direitos reservados. Feito com 🌱 para o futuro.</p>
+          <p>© 2026 Consus. Todos os direitos reservados. Feito com 🌱 para o futuro.</p>
         </div>
       </footer>
     </div>
