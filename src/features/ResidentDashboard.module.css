@@ -715,6 +715,7 @@
   z-index: 1;
   display: flex;
   justify-content: center;
+  touch-action: none;
 }
 
 .wheelList {
@@ -722,6 +723,7 @@
   padding-bottom: 68px;
   cursor: grab;
   width: 100%;
+  touch-action: none;
 }
 
 .wheelList:active {

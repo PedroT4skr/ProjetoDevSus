@@ -393,6 +393,8 @@ export default function ResidentDashboard() {
               initial={{ scale: 0.9, opacity: 0 }}
               animate={{ scale: 1, opacity: 1 }}
               exit={{ scale: 0.9, opacity: 0 }}
+              onPointerDown={e => e.stopPropagation()}
+              onMouseDown={e => e.stopPropagation()}
               onClick={e => e.stopPropagation()}
             >
               <div className={styles.modalHeader}>
