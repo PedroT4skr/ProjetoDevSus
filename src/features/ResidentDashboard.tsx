@@ -239,20 +239,30 @@ export default function ResidentDashboard() {
 
             <div className={styles.historyList}>
               {requests.length > 0 ? (
-                requests.map(req => (
-                  <div key={req.id} className={styles.historyItem}>
-                    <div className={styles.historyIcon}>{RESIDUE_TYPES.find(t => t.type === req.residueType)?.icon}</div>
-                    <div className={styles.historyInfo}>
-                      <div className={styles.historyRow}>
-                        <h4>{req.residueType}</h4>
-                        <span className={`${styles.statusBadge} ${styles[req.status.toLowerCase()]}`}>
-                          {req.status === 'COLETADO' ? 'Concluído' : req.status === 'PENDENTE' ? 'Aguardando' : req.status === 'EM_ROTA' ? 'Em Rota' : 'Cancelado'}
-                        </span>
+                <>
+                  {requests.slice(0, 3).map(req => (
+                    <div key={req.id} className={styles.historyItem}>
+                      <div className={styles.historyIcon}>{RESIDUE_TYPES.find(t => t.type === req.residueType)?.icon}</div>
+                      <div className={styles.historyInfo}>
+                        <div className={styles.historyRow}>
+                          <h4>{req.residueType}</h4>
+                          <span className={`${styles.statusBadge} ${styles[req.status.toLowerCase()]}`}>
+                            {req.status === 'COLETADO' ? 'Concluído' : req.status === 'PENDENTE' ? 'Aguardando' : req.status === 'EM_ROTA' ? 'Em Rota' : 'Cancelado'}
+                          </span>
+                        </div>
+                        <p>{req.status === 'COLETADO' ? 'Coletado em 12/05' : req.status === 'PENDENTE' ? 'Disponível às ' + req.availableTime : 'Status: ' + req.status}</p>
                       </div>
-                      <p>{req.status === 'COLETADO' ? 'Coletado em 12/05' : req.status === 'PENDENTE' ? 'Disponível às ' + req.availableTime : 'Status: ' + req.status}</p>
                     </div>
-                  </div>
-                ))
+                  ))}
+                  {requests.length > 3 && (
+                    <button 
+                      className={styles.viewAllButton}
+                      onClick={() => router.push('/dashboard/history')}
+                    >
+                      Ver todo o histórico <ArrowUpRight size={14} />
+                    </button>
+                  )}
+                </>
               ) : (
                 <div className={styles.emptyHistory}>
                   <p>Nenhuma coleta registrada.</p>
