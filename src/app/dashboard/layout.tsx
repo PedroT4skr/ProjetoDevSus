@@ -68,8 +68,17 @@ export default function DashboardLayout({
         </nav>
 
         <div className={styles.sidebarFooter}>
+          <div className={styles.sidebarProfile}>
+            <div className={styles.sidebarAvatar}>
+              {user.name.charAt(0)}
+            </div>
+            <div className={styles.sidebarUserDetails}>
+              <span className={styles.sidebarUserName}>{user.name}</span>
+              <span className={styles.sidebarUserEmail}>{user.email}</span>
+            </div>
+          </div>
           <button className={styles.logoutButton} onClick={logout}>
-            <LogOut size={20} />
+            <LogOut size={18} />
             Sair
           </button>
         </div>
@@ -77,34 +86,6 @@ export default function DashboardLayout({
 
       {/* Main Content Area */}
       <div className={styles.mainWrapper}>
-        <header className={styles.header}>
-          <div className={styles.headerLeft}>
-            <button 
-              className={styles.mobileMenuButton}
-              onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-            >
-              {isMobileMenuOpen ? <X size={24} /> : <Menu size={24} />}
-            </button>
-            <h1>Painel {user.role === 'MORADOR' ? 'do Morador' : user.role === 'COLETOR' ? 'do Coletor' : 'Admin'}</h1>
-          </div>
-          
-          <div className={styles.headerRight}>
-            <button className={styles.iconButton}>
-              <Bell size={20} />
-              <span className={styles.notificationDot}></span>
-            </button>
-            <div className={styles.userInfo}>
-              <div className={styles.userAvatar}>
-                {user.name.charAt(0)}
-              </div>
-              <div className={styles.userDetails}>
-                <span className={styles.userName}>{user.name}</span>
-                <span className={styles.userRole}>{user.role}</span>
-              </div>
-            </div>
-          </div>
-        </header>
-
         <main className={styles.content}>
           {children}
         </main>
