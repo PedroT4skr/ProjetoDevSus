@@ -13,8 +13,6 @@ import {
   Calendar,
   Filter,
   Download,
-  MoreHorizontal,
-  Clock,
   ArrowUpRight
 } from 'lucide-react';
 import styles from './AdminDashboard.module.css';
@@ -116,31 +114,6 @@ export default function AdminDashboard() {
 
         {/* Atividade Recente e Coletores */}
         <div className={styles.sideCol}>
-          <div className={styles.activityCard}>
-            <div className={styles.cardHeader}>
-              <h4>Atividade em Tempo Real</h4>
-              <MoreHorizontal size={18} className={styles.moreIcon} />
-            </div>
-            <div className={styles.activityList}>
-              {requests.slice(0, 5).map((req, i) => (
-                <div key={req.id} className={styles.activityItem}>
-                  <div className={styles.activityIcon}>
-                     <Clock size={14} />
-                  </div>
-                  <div className={styles.activityInfo}>
-                    <p><strong>Apto {req.apartment}</strong> solicitou {req.residueType.toLowerCase()}</p>
-                    <div className={styles.activityMeta}>
-                      <span>{new Date(req.createdAt).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}</span>
-                      <span className={styles.statusTag} data-status={req.status}>
-                        {req.status === 'PENDENTE' ? 'Pendente' : 'Em Rota'}
-                      </span>
-                    </div>
-                  </div>
-                </div>
-              ))}
-              {requests.length === 0 && <p className={styles.empty}>Sem atividades recentes.</p>}
-            </div>
-          </div>
 
           <div className={styles.collectorsCard}>
             <h4>Coletores de Plantão</h4>
