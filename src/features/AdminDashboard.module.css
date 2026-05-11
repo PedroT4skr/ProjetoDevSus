@@ -1,18 +1,55 @@
 .container {
+  padding: 2rem;
+  max-width: 1200px;
+  margin: 0 auto;
   display: flex;
   flex-direction: column;
-  gap: 2.5rem;
-  animation: fadeIn 0.5s ease-out;
+  gap: 2rem;
 }
 
-.header h2 {
-  font-size: 2rem;
-  font-weight: 800;
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+}
+
+.headerInfo h1 {
+  font-size: 1.8rem;
+  color: #0f172a;
   margin-bottom: 0.25rem;
 }
 
-.header p {
-  color: var(--muted-foreground);
+.headerInfo p {
+  color: #64748b;
+}
+
+.headerActions {
+  display: flex;
+  gap: 1rem;
+}
+
+.filterBtn, .exportBtn {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.6rem 1rem;
+  border-radius: 8px;
+  font-size: 0.9rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.filterBtn {
+  background: white;
+  border: 1px solid #e2e8f0;
+  color: #64748b;
+}
+
+.exportBtn {
+  background: #0f172a;
+  border: 1px solid #0f172a;
+  color: white;
 }
 
 .statsGrid {
@@ -22,59 +59,102 @@
 }
 
 .statCard {
-  background: var(--card);
+  background: white;
   padding: 1.5rem;
-  border-radius: var(--radius);
-  border: 1px solid var(--border);
+  border-radius: 16px;
+  border: 1px solid #f1f5f9;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
+}
+
+.statTop {
   display: flex;
-  align-items: center;
-  gap: 1.25rem;
-  box-shadow: var(--shadow-sm);
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 1rem;
 }
 
 .statIcon {
-  width: 56px;
-  height: 56px;
-  border-radius: 1rem;
+  width: 48px;
+  height: 48px;
+  border-radius: 12px;
   display: flex;
   align-items: center;
   justify-content: center;
 }
 
+.trendBadge {
+  font-size: 0.8rem;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  gap: 2px;
+  background: rgba(0,0,0,0.03);
+  padding: 4px 8px;
+  border-radius: 20px;
+}
+
 .statContent h3 {
-  font-size: 1.75rem;
-  font-weight: 800;
-  line-height: 1;
-  margin-bottom: 0.25rem;
+  font-size: 2rem;
+  color: #0f172a;
+  margin: 0;
 }
 
 .statContent p {
-  font-size: 0.875rem;
-  color: var(--muted-foreground);
+  color: #64748b;
+  font-size: 0.9rem;
   font-weight: 500;
 }
 
-.chartsRow {
+.mainGrid {
   display: grid;
-  grid-template-columns: 2fr 1fr;
+  grid-template-columns: 1.5fr 1fr;
   gap: 1.5rem;
 }
 
-.chartPlaceholder {
-  background: var(--card);
-  padding: 2rem;
-  border-radius: var(--radius);
-  border: 1px solid var(--border);
+.chartSection {
+  background: white;
+  padding: 1.5rem;
+  border-radius: 20px;
+  border: 1px solid #f1f5f9;
   display: flex;
   flex-direction: column;
+  gap: 2rem;
 }
 
-.chartHeader {
+.cardHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.cardTitle {
   display: flex;
   align-items: center;
   gap: 0.75rem;
-  margin-bottom: 2.5rem;
-  color: var(--primary-dark);
+}
+
+.cardTitle h4 {
+  color: #0f172a;
+  font-size: 1.1rem;
+}
+
+.cardSelect {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  background: #f8fafc;
+  padding: 6px 12px;
+  border-radius: 8px;
+  font-size: 0.8rem;
+  color: #64748b;
+}
+
+.chartBody {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  min-height: 250px;
 }
 
 .barGrid {
@@ -83,66 +163,56 @@
   justify-content: space-between;
   height: 200px;
   padding: 0 1rem;
-  border-bottom: 1px solid var(--border);
+}
+
+.barWrapper {
+  width: 12%;
+  height: 100%;
+  display: flex;
+  align-items: flex-end;
+  background: #f8fafc;
+  border-radius: 8px;
+  overflow: hidden;
 }
 
 .bar {
-  width: 40px;
-  background: linear-gradient(to top, var(--primary), var(--primary-light));
-  border-radius: 0.5rem 0.5rem 0 0;
-  transition: all 0.3s ease;
-}
-
-.bar:hover {
-  filter: brightness(1.1);
-  transform: scaleY(1.05);
+  width: 100%;
+  background: linear-gradient(to top, #10b981, #34d399);
+  border-radius: 4px;
 }
 
 .barLabels {
   display: flex;
   justify-content: space-between;
   padding: 1rem 1rem 0;
-  color: var(--muted-foreground);
+  color: #94a3b8;
   font-size: 0.75rem;
-  font-weight: 600;
+  font-weight: 700;
 }
 
-.recentActivity {
-  background: var(--card);
-  padding: 2rem;
-  border-radius: var(--radius);
-  border: 1px solid var(--border);
-}
-
-.recentActivity h4 {
-  margin-bottom: 1.5rem;
-}
-
-.activityList {
+.sideCol {
   display: flex;
   flex-direction: column;
   gap: 1.5rem;
 }
 
+.activityCard, .collectorsCard {
+  background: white;
+  padding: 1.5rem;
+  border-radius: 20px;
+  border: 1px solid #f1f5f9;
+}
+
+.activityList {
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+  margin-top: 1.5rem;
+}
+
 .activityItem {
   display: flex;
   gap: 1rem;
-  position: relative;
-}
-
-.activityItem:not(:last-child)::after {
-  content: '';
-  position: absolute;
-  top: 1rem;
-  left: 5px;
-  bottom: -1rem;
-  width: 2px;
-  background: var(--border);
-}
-
-.dot {
-  width: 12px;
-  height: 12px;
   background: var(--primary);
   border-radius: 50%;
   margin-top: 4px;
