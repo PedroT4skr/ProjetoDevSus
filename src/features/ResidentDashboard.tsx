@@ -97,29 +97,6 @@ export default function ResidentDashboard() {
         <motion.div animate={{ rotate: 360 }} transition={{ duration: 20, repeat: Infinity, ease: "linear" }} className={styles.floatingStar}><Sparkles size={20} /></motion.div>
       </div>
 
-      <div className={styles.topGrid}>
-        <section className={styles.heroCard}>
-          <div className={styles.heroContent}>
-            <div className={styles.heroBadge}><Sparkles size={14} /> Novo no App</div>
-            <h3>Facilite seu descarte</h3>
-            <p>Solicite a coleta de recicláveis em segundos e ajude a transformar o futuro do nosso planeta.</p>
-            <motion.button 
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
-              className={styles.ctaButton} 
-              onClick={() => setIsModalOpen(true)}
-            >
-              <Plus size={20} /> Solicitar Coleta
-            </motion.button>
-          </div>
-          <div className={styles.heroComposition}>
-             <div className={styles.compIcon1}><Trash2 size={48} /></div>
-             <div className={styles.compIcon2}><Package size={40} /></div>
-             <div className={styles.compIcon3}><Leaf size={32} /></div>
-             <div className={styles.compCircle}></div>
-          </div>
-        </section>
-
       <section className={styles.newsBanner}>
         <div className={styles.newsTitle}>Notícias Verdes 🌿</div>
         <div className={styles.newsContent}>
