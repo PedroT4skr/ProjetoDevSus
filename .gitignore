@@ -45,7 +45,10 @@ contexto.md
 plano_de_implementacao.md
 SDD.md
 .agents/
+.gemini/
 .cursorrules
+CLAUDE.md
+AGENTS.md
 
 # local scripts
 *.bat
