@@ -97,6 +97,7 @@ export default function ResidentDashboard() {
         <motion.div animate={{ rotate: 360 }} transition={{ duration: 20, repeat: Infinity, ease: "linear" }} className={styles.floatingStar}><Sparkles size={20} /></motion.div>
       </div>
 
+
       <section className={styles.newsBanner}>
         <div className={styles.newsTitle}>Notícias Verdes 🌿</div>
         <div className={styles.newsContent}>
