@@ -554,53 +554,90 @@
   align-items: center;
 }
 
-.phoneFrame {
-  width: 280px;
-  height: 560px;
+.browserFrame {
+  width: 100%;
+  max-width: 500px;
+  height: 380px;
+  background: #ffffff;
+  border-radius: 12px;
+  box-shadow: 0 40px 80px -15px rgba(0,0,0,0.5);
+  overflow: hidden;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.browserHeader {
+  height: 36px;
+  background: #f1f5f9;
+  display: flex;
+  align-items: center;
+  padding: 0 1rem;
+  gap: 1.5rem;
+}
+
+.windowControls {
+  display: flex;
+  gap: 6px;
+}
+
+.wDot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+}
+
+.browserAddress {
+  flex: 1;
+  background: white;
+  height: 20px;
+  border-radius: 4px;
+  font-size: 0.6rem;
+  display: flex;
+  align-items: center;
+  padding: 0 0.75rem;
+  color: #94a3b8;
+  font-weight: 600;
+}
+
+.dashboardApp {
+  height: calc(100% - 36px);
+  display: flex;
+}
+
+.dashSidebar {
+  width: 50px;
   background: #0f172a;
-  border: 12px solid #1e293b;
-  border-radius: 40px;
+  padding: 1rem 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+}
+
+.sideItem {
+  width: 24px;
+  height: 24px;
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 6px;
+}
+
+.dashContent {
+  flex: 1;
+  padding: 1rem;
+  background: #f8fafc;
+  display: flex;
+  flex-direction: column;
   position: relative;
-  box-shadow: 0 50px 100px -20px rgba(0,0,0,0.5);
   overflow: hidden;
 }
 
-.phoneHeader {
-  height: 30px;
-  width: 100%;
+.dashHeader {
   display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
-.phoneSpeaker {
-  width: 40px;
-  height: 4px;
-  background: #334155;
-  border-radius: 2px;
-}
-
-.appScreen {
-  width: 100%;
-  height: calc(100% - 30px);
-  background: #f8fafc;
-  position: relative;
-  display: flex;
-  flex-direction: column;
-}
-
-.appNav {
-  height: 50px;
-  padding: 0 1rem;
-  display: flex;
-  align-items: center;
   justify-content: space-between;
-  background: white;
-  border-bottom: 1px solid #e2e8f0;
+  margin-bottom: 1rem;
 }
 
-.appAvatar { width: 24px; height: 24px; background: #e2e8f0; border-radius: 50%; }
-.appSearch { width: 60%; height: 8px; background: #f1f5f9; border-radius: 4px; }
+.dashTitleSkeleton { width: 100px; height: 12px; background: #e2e8f0; border-radius: 6px; }
+.dashUserSkeleton { width: 30px; height: 12px; background: #e2e8f0; border-radius: 6px; }
 
 .appMap {
   flex: 1;

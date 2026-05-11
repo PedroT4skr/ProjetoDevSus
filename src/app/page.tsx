@@ -206,53 +206,65 @@ export default function Home() {
             </div>
             <div className={styles.howVisual}>
                <div className={styles.visualMockup}>
-                 <div className={styles.phoneFrame}>
-                    <div className={styles.phoneHeader}>
-                      <div className={styles.phoneSpeaker} />
+                 <div className={styles.browserFrame}>
+                    <div className={styles.browserHeader}>
+                      <div className={styles.windowControls}>
+                        <div className={styles.wDot} style={{ background: '#ff5f56' }} />
+                        <div className={styles.wDot} style={{ background: '#ffbd2e' }} />
+                        <div className={styles.wDot} style={{ background: '#27c93f' }} />
+                      </div>
+                      <div className={styles.browserAddress}>devsus.com/dashboard</div>
                     </div>
-                    <div className={styles.appScreen}>
-                       <div className={styles.appNav}>
-                         <div className={styles.appAvatar} />
-                         <div className={styles.appSearch} />
+                    <div className={styles.dashboardApp}>
+                       <div className={styles.dashSidebar}>
+                          <div className={styles.sideItem} />
+                          <div className={styles.sideItem} />
+                          <div className={styles.sideItem} />
                        </div>
-                       <div className={styles.appMap}>
-                          <div className={styles.mapGrid} />
-                          <motion.div 
-                            animate={{ 
-                              x: [10, 80, 40, 100], 
-                              y: [20, 10, 60, 30] 
-                            }}
-                            transition={{ duration: 10, repeat: Infinity, ease: "linear" }}
-                            className={styles.mapTruck}
-                          >
-                            <Truck size={14} color="white" />
-                          </motion.div>
-                          <div className={styles.mapPin}>
-                            <div className={styles.pinPulse} />
-                            <div className={styles.pinDot} />
+                       <div className={styles.dashContent}>
+                          <div className={styles.dashHeader}>
+                             <div className={styles.dashTitleSkeleton} />
+                             <div className={styles.dashUserSkeleton} />
                           </div>
-                       </div>
-                       <div className={styles.appOverlay}>
-                          <motion.div 
-                            initial={{ y: 50, opacity: 0 }}
-                            whileInView={{ y: 0, opacity: 1 }}
-                            className={styles.mockCard}
-                          >
-                             <div className={styles.mockCardHeader}>
-                               <strong>Coleta em Rota</strong>
-                               <span>4 min</span>
+                          <div className={styles.appMap}>
+                             <div className={styles.mapGrid} />
+                             <motion.div 
+                               animate={{ 
+                                 x: [10, 150, 80, 200], 
+                                 y: [20, 40, 120, 60] 
+                               }}
+                               transition={{ duration: 15, repeat: Infinity, ease: "linear" }}
+                               className={styles.mapTruck}
+                             >
+                               <Truck size={14} color="white" />
+                             </motion.div>
+                             <div className={styles.mapPin}>
+                               <div className={styles.pinPulse} />
+                               <div className={styles.pinDot} />
                              </div>
-                             <div className={styles.mockProgress}>
-                                <div className={styles.mockFill} />
-                             </div>
-                             <div className={styles.mockUser}>
-                                <div className={styles.mockAvatar} />
-                                <div className={styles.mockText}>
-                                   <strong>Carlos Silva</strong>
-                                   <span>Coletor Verificado</span>
+                          </div>
+                          <div className={styles.appOverlay}>
+                             <motion.div 
+                               initial={{ y: 50, opacity: 0 }}
+                               whileInView={{ y: 0, opacity: 1 }}
+                               className={styles.mockCard}
+                             >
+                                <div className={styles.mockCardHeader}>
+                                  <strong>Coleta em Rota</strong>
+                                  <span>4 min</span>
                                 </div>
-                             </div>
-                          </motion.div>
+                                <div className={styles.mockProgress}>
+                                   <div className={styles.mockFill} />
+                                </div>
+                                <div className={styles.mockUser}>
+                                   <div className={styles.mockAvatar} />
+                                   <div className={styles.mockText}>
+                                      <strong>Carlos Silva</strong>
+                                      <span>Coletor Verificado</span>
+                                   </div>
+                                </div>
+                             </motion.div>
+                          </div>
                        </div>
                     </div>
                  </div>
