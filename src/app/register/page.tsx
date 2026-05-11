@@ -4,7 +4,7 @@ import { useState } from 'react';
 import { useRouter } from 'next/navigation';
 import { useAuth } from '@/contexts/AuthContext';
 import { UserRepository } from '@/services/repositories';
-import { Leaf, User, Mail, Building, ArrowRight } from 'lucide-react';
+import { Leaf, User, Mail, Building, ArrowRight, Lock } from 'lucide-react';
 import styles from './register.module.css';
 import { UserRole } from '@/lib/types';
 
@@ -12,6 +12,7 @@ export default function RegisterPage() {
   const [formData, setFormData] = useState({
     name: '',
     email: '',
+    password: '',
     apartment: '',
     role: 'MORADOR' as UserRole,
   });
@@ -90,20 +91,36 @@ export default function RegisterPage() {
             </div>
           </div>
 
-          <div className={styles.row}>
-            <div className={styles.inputGroup}>
-              <label>Apartamento</label>
-              <div className={styles.inputWrapper}>
-                <Building size={20} className={styles.icon} />
-                <input
-                  type="text"
-                  placeholder="101A"
-                  value={formData.apartment}
-                  onChange={(e) => setFormData({...formData, apartment: e.target.value})}
-                  required={formData.role === 'MORADOR'}
-                />
-              </div>
+          <div className={styles.inputGroup}>
+            <label>Senha</label>
+            <div className={styles.inputWrapper}>
+              <Lock size={20} className={styles.icon} />
+              <input
+                type="password"
+                placeholder="••••••••"
+                value={formData.password}
+                onChange={(e) => setFormData({...formData, password: e.target.value})}
+                required
+              />
             </div>
+          </div>
+
+          <div className={styles.row}>
+            {formData.role === 'MORADOR' && (
+              <div className={styles.inputGroup}>
+                <label>Apartamento</label>
+                <div className={styles.inputWrapper}>
+                  <Building size={20} className={styles.icon} />
+                  <input
+                    type="text"
+                    placeholder="101A"
+                    value={formData.apartment}
+                    onChange={(e) => setFormData({...formData, apartment: e.target.value})}
+                    required
+                  />
+                </div>
+              </div>
+            )}
 
             <div className={styles.inputGroup}>
               <label>Eu sou...</label>

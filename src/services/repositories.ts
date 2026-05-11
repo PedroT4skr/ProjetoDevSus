@@ -40,6 +40,14 @@ export class RequestRepository {
 }
 
 export class UserRepository {
+  static async validateLogin(email: string, password?: string): Promise<User | undefined> {
+    const user = db.getUsers().find(u => u.email === email);
+    if (user && user.password === password) {
+      return user;
+    }
+    return undefined;
+  }
+
   static async findByEmail(email: string): Promise<User | undefined> {
     return db.getUsers().find(u => u.email === email);
   }

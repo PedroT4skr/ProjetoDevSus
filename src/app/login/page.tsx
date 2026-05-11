@@ -24,13 +24,13 @@ export default function LoginPage() {
       // Simulação de delay
       await new Promise(resolve => setTimeout(resolve, 800));
       
-      const user = await UserRepository.findByEmail(email);
+      const user = await UserRepository.validateLogin(email, password);
       
       if (user) {
         login(user);
         router.push('/dashboard');
       } else {
-        setError('Usuário não encontrado. Experimente: admin@devsus.com ou joao@coletor.com');
+        setError('E-mail ou senha incorretos.');
       }
     } catch {
       setError('Ocorreu um erro ao tentar entrar.');
