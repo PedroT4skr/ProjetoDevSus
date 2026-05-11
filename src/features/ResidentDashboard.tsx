@@ -16,7 +16,15 @@ import {
   Leaf
 } from 'lucide-react';
 import styles from './ResidentDashboard.module.css';
-import Image from 'next/image';
+import { motion, AnimatePresence } from 'framer-motion';
+import { 
+  Trophy, 
+  ArrowUpRight, 
+  MessageSquare, 
+  Sparkles, 
+  Zap,
+  Star
+} from 'lucide-react';
 
 const RESIDUE_TYPES: { type: ResidueType; icon: string; label: string; color: string }[] = [
   { type: 'PLASTICO', icon: '🥤', label: 'Plástico', color: '#60a5fa' },
@@ -75,29 +83,61 @@ export default function ResidentDashboard() {
       <header className={styles.header}>
         <div className={styles.welcomeInfo}>
           <h2>Olá, {user?.name.split(' ')[0]}! 👋</h2>
-          <p>Seu condomínio já reciclou <strong>128kg</strong> este mês.</p>
+          <p>O seu condomínio já reciclou um total de <strong>128kg</strong> este mês.</p>
+        </div>
+        <div className={styles.headerActions}>
+          <button className={styles.iconButton}><MessageSquare size={20} /></button>
+          <button className={styles.iconButton}><Bell size={20} /></button>
         </div>
       </header>
 
-      <section className={styles.heroCard}>
-        <div className={styles.heroContent}>
-          <h3>Facilite seu descarte</h3>
-          <p>Solicite a coleta de recicláveis sem sair de casa e ajude o planeta.</p>
-          <button className={styles.ctaButton} onClick={() => setIsModalOpen(true)}>
-            <Plus size={20} /> Nova Solicitação
-          </button>
-        </div>
-        <div className={styles.heroImage}>
-          <Image 
-            src="/resident_hero.png" 
-            alt="Reciclagem" 
-            width={200} 
-            height={200} 
-            className={styles.illustration}
-            priority
-          />
-        </div>
-      </section>
+      {/* Floating Background Elements */}
+      <div className={styles.floatingLayer}>
+        <motion.div animate={{ y: [0, -20, 0] }} transition={{ duration: 4, repeat: Infinity }} className={styles.floatingLeaf1}><Leaf size={24} /></motion.div>
+        <motion.div animate={{ y: [0, 20, 0] }} transition={{ duration: 5, repeat: Infinity }} className={styles.floatingLeaf2}><Leaf size={16} /></motion.div>
+        <motion.div animate={{ rotate: 360 }} transition={{ duration: 20, repeat: Infinity, ease: "linear" }} className={styles.floatingStar}><Sparkles size={20} /></motion.div>
+      </div>
+
+      <div className={styles.topGrid}>
+        <section className={styles.heroCard}>
+          <div className={styles.heroContent}>
+            <div className={styles.heroBadge}><Sparkles size={14} /> Novo no App</div>
+            <h3>Facilite seu descarte</h3>
+            <p>Solicite a coleta de recicláveis em segundos e ajude a transformar o futuro do nosso planeta.</p>
+            <motion.button 
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.95 }}
+              className={styles.ctaButton} 
+              onClick={() => setIsModalOpen(true)}
+            >
+              <Plus size={20} /> Solicitar Coleta
+            </motion.button>
+          </div>
+          <div className={styles.heroComposition}>
+             <div className={styles.compIcon1}><Trash2 size={48} /></div>
+             <div className={styles.compIcon2}><Package size={40} /></div>
+             <div className={styles.compIcon3}><Leaf size={32} /></div>
+             <div className={styles.compCircle}></div>
+          </div>
+        </section>
+
+        <section className={styles.newsBanner}>
+            <div className={styles.newsTitle}>Notícias Verdes 🌿</div>
+            <div className={styles.newsContent}>
+              <motion.div 
+                animate={{ x: [0, -200, 0] }} 
+                transition={{ duration: 15, repeat: Infinity, ease: "linear" }}
+                className={styles.newsTrack}
+              >
+                <span>🎉 Condomínio bateu a meta de reciclagem de papel!</span>
+                <span className={styles.newsDivider}>|</span>
+                <span>🚛 Nova coleta de eletrônicos neste sábado às 10h.</span>
+                <span className={styles.newsDivider}>|</span>
+                <span>💡 Dica: Lave suas embalagens de iogurte antes de descartar.</span>
+              </motion.div>
+            </div>
+        </section>
+      </div>
 
       <section className={styles.stats}>
         <div className={styles.statCard}>
@@ -105,7 +145,10 @@ export default function ResidentDashboard() {
             <CheckCircle2 size={24} />
           </div>
           <div className={styles.statData}>
-            <h3>{requests.filter(r => r.status === 'COLETADO').length}</h3>
+            <div className={styles.statHeader}>
+                <h3>{requests.filter(r => r.status === 'COLETADO').length}</h3>
+                <span className={styles.trend}><ArrowUpRight size={12} /> +12%</span>
+            </div>
             <p>Concluídas</p>
           </div>
         </div>
@@ -118,10 +161,27 @@ export default function ResidentDashboard() {
             <p>Em progresso</p>
           </div>
         </div>
+        <div className={styles.statCard}>
+          <div className={styles.statIcon} style={{ background: '#eff6ff', color: '#3b82f6' }}>
+            <Zap size={24} />
+          </div>
+          <div className={styles.statData}>
+            <h3>450</h3>
+            <p>EcoPoints</p>
+          </div>
+        </div>
       </section>
 
       <div className={styles.mainGrid}>
         <div className={styles.leftCol}>
+          <section className={styles.activeSection}>
+              <div className={styles.sectionHeader}>
+                <h3>Painel de Ações</h3>
+                <div className={styles.tabs}>
+                    <button className={styles.activeTab}>Próxima Coleta</button>
+                    <button className={styles.tab}>Histórico</button>
+                </div>
+              </div>
 
           {activeRequest ? (
             <section className={styles.activeSection}>
@@ -172,29 +232,63 @@ export default function ResidentDashboard() {
         </div>
 
         <div className={styles.rightCol}>
+          <section className={styles.rankingCard}>
+            <div className={styles.cardHeader}>
+                <h3>Ranking do Prédio</h3>
+                <Trophy size={20} color="#f59e0b" />
+            </div>
+            <div className={styles.rankingList}>
+                <div className={styles.rankingItem}>
+                    <div className={styles.rankNum}>1</div>
+                    <div className={styles.rankInfo}>
+                        <span>Apt 102B</span>
+                        <div className={styles.progressBar}><div className={styles.progressFill} style={{ width: '90%' }}></div></div>
+                    </div>
+                    <span className={styles.rankValue}>42kg</span>
+                </div>
+                <div className={styles.rankingItem}>
+                    <div className={styles.rankNum}>2</div>
+                    <div className={styles.rankInfo}>
+                        <span>Apt 405A</span>
+                        <div className={styles.progressBar}><div className={styles.progressFill} style={{ width: '75%' }}></div></div>
+                    </div>
+                    <span className={styles.rankValue}>38kg</span>
+                </div>
+                <div className={`${styles.rankingItem} ${styles.currentRank}`}>
+                    <div className={styles.rankNum}>12</div>
+                    <div className={styles.rankInfo}>
+                        <span>Você (201C)</span>
+                        <div className={styles.progressBar}><div className={styles.progressFill} style={{ width: '40%' }}></div></div>
+                    </div>
+                    <span className={styles.rankValue}>12.4kg</span>
+                </div>
+            </div>
+          </section>
+
+          <section className={styles.impactCard}>
+            <div className={styles.impactIcon}><Star size={24} /></div>
+            <h4>EcoImpacto</h4>
+            <div className={styles.impactValue}>12.4kg</div>
+            <p>CO2 evitado este mês</p>
+            <div className={styles.impactDetail}>Equivalente a 5 árvores plantadas 🌳</div>
+          </section>
+
           <section className={styles.tipsSection}>
             <h3>Dicas de Reciclagem</h3>
             <div className={styles.tipCard}>
               <div className={styles.tipIcon}>💡</div>
               <div className={styles.tipText}>
                 <h4>Lave as embalagens</h4>
-                <p>Retirar restos de comida ajuda a manter o valor do material reciclável.</p>
+                <p>Retirar restos de comida ajuda a manter o valor do material.</p>
               </div>
             </div>
             <div className={styles.tipCard}>
               <div className={styles.tipIcon}>📦</div>
               <div className={styles.tipText}>
                 <h4>Compacte caixas</h4>
-                <p>Desmontar caixas de papelão economiza espaço e facilita o transporte.</p>
+                <p>Economiza espaço e facilita o transporte.</p>
               </div>
             </div>
-          </section>
-
-          <section className={styles.impactCard}>
-            <div className={styles.impactIcon}><Leaf size={24} /></div>
-            <h4>Seu Impacto</h4>
-            <div className={styles.impactValue}>12.4kg</div>
-            <p>CO2 evitado este mês</p>
           </section>
         </div>
       </div>
