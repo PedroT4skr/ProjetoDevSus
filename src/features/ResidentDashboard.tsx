@@ -23,10 +23,53 @@ import {
   Star
 } from 'lucide-react';
 import styles from './ResidentDashboard.module.css';
-import Picker from 'react-mobile-picker';
 
 const HOURS = Array.from({ length: 24 }, (_, i) => i.toString().padStart(2, '0'));
 const MINUTES = Array.from({ length: 60 }, (_, i) => i.toString().padStart(2, '0'));
+
+interface WheelPickerProps {
+  options: string[];
+  value: string;
+  onChange: (value: string) => void;
+}
+
+function WheelPicker({ options, value, onChange }: WheelPickerProps) {
+  const itemHeight = 44;
+  const selectedIndex = options.indexOf(value);
+  const offset = -selectedIndex * itemHeight;
+
+  return (
+    <div className={styles.wheelColumn}>
+      <motion.div
+        className={styles.wheelList}
+        drag="y"
+        dragConstraints={{
+          top: -(options.length - 1) * itemHeight,
+          bottom: 0,
+        }}
+        dragElastic={0.2}
+        animate={{ y: offset }}
+        onDragEnd={(_, info) => {
+          const delta = info.offset.y;
+          const newIndex = Math.round((offset + delta) / -itemHeight);
+          const clampedIndex = Math.max(0, Math.min(options.length - 1, newIndex));
+          onChange(options[clampedIndex]);
+        }}
+        transition={{ type: "spring", stiffness: 300, damping: 30 }}
+      >
+        {options.map((opt, i) => (
+          <div
+            key={opt}
+            className={`${styles.wheelItem} ${opt === value ? styles.selectedWheelItem : ''}`}
+            onClick={() => onChange(opt)}
+          >
+            {opt}
+          </div>
+        ))}
+      </motion.div>
+    </div>
+  );
+}
 
 const RESIDUE_TYPES: { type: ResidueType; icon: string; label: string; color: string }[] = [
   { type: 'PLASTICO', icon: '🥤', label: 'Plástico', color: '#60a5fa' },
@@ -345,20 +388,16 @@ export default function ResidentDashboard() {
                   <div className={styles.formGroup}>
                     <label>Horário de Disponibilidade</label>
                     <div className={styles.wheelPickerContainer}>
-                      <Picker
-                        optionGroups={{
-                          hour: HOURS,
-                          minute: MINUTES
-                        }}
-                        valueGroups={newRequest.time}
-                        onChange={(name, value) => {
-                          setNewRequest({
-                            ...newRequest,
-                            time: { ...newRequest.time, [name]: value as string }
-                          });
-                        }}
-                        itemHeight={44}
-                        height={180}
+                      <WheelPicker 
+                        options={HOURS} 
+                        value={newRequest.time.hour} 
+                        onChange={(h) => setNewRequest({...newRequest, time: {...newRequest.time, hour: h}})} 
+                      />
+                      <div className={styles.pickerSeparator}>:</div>
+                      <WheelPicker 
+                        options={MINUTES} 
+                        value={newRequest.time.minute} 
+                        onChange={(m) => setNewRequest({...newRequest, time: {...newRequest.time, minute: m}})} 
                       />
                     </div>
                   </div>

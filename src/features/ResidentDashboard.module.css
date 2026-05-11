@@ -670,7 +670,7 @@
   }
 }
 
-/* Wheel Picker Customization (react-mobile-picker v1.2.0) */
+/* Custom Wheel Picker Styling */
 .wheelPickerContainer {
   width: 100%;
   height: 180px;
@@ -685,41 +685,66 @@
   margin: 1rem 0;
 }
 
-.wheelPickerContainer :global(.picker-container) {
-  background: none !important;
-  font-family: 'Outfit', sans-serif !important;
+/* Central highlight bar */
+.wheelPickerContainer::before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 90%;
+  height: 44px;
+  background: white;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+  pointer-events: none;
+  z-index: 0;
 }
 
-.wheelPickerContainer :global(.picker-inner) {
-  background: none !important;
+.wheelColumn {
+  flex: 1;
+  height: 180px;
+  position: relative;
+  overflow: hidden;
+  z-index: 1;
+  display: flex;
+  justify-content: center;
 }
 
-.wheelPickerContainer :global(.picker-item) {
-  font-size: 1.1rem !important;
-  color: #94a3b8 !important;
-  font-weight: 600 !important;
-  transition: all 0.2s ease !important;
-  padding: 0 !important;
+.wheelList {
+  padding-top: 68px; /* Offset to center the first item (180/2 - 44/2) */
+  padding-bottom: 68px;
+  cursor: grab;
+  width: 100%;
 }
 
-.wheelPickerContainer :global(.picker-item-selected) {
-  color: #10b981 !important;
-  font-size: 1.5rem !important;
-  font-weight: 800 !important;
+.wheelList:active {
+  cursor: grabbing;
 }
 
-.wheelPickerContainer :global(.picker-highlight) {
-  background: white !important;
-  border-radius: 12px !important;
-  box-shadow: 0 4px 12px rgba(0,0,0,0.05) !important;
-  border: none !important;
-  z-index: -1;
-  height: 44px !important;
-  top: 50% !important;
-  transform: translateY(-50%) !important;
+.wheelItem {
+  height: 44px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: #94a3b8;
+  transition: all 0.2s ease;
+  user-select: none;
 }
 
-.wheelPickerContainer :global(.picker-highlight::before),
-.wheelPickerContainer :global(.picker-highlight::after) {
-  display: none !important;
+.selectedWheelItem {
+  color: #10b981;
+  font-size: 1.5rem;
+  font-weight: 800;
+  transform: scale(1.1);
+}
+
+.pickerSeparator {
+  font-size: 1.5rem;
+  font-weight: 900;
+  color: #cbd5e1;
+  z-index: 2;
+  margin-top: -2px;
 }
