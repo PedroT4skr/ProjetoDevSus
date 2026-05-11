@@ -1,7 +1,7 @@
 'use client';
 
 import { useAuth } from '@/contexts/AuthContext';
-import { useRouter } from 'next/navigation';
+import { useRouter, usePathname } from 'next/navigation';
 import { useEffect } from 'react';
 import { 
   LayoutDashboard, 
@@ -23,6 +23,7 @@ export default function DashboardLayout({
 }) {
   const { user, logout, loading } = useAuth();
   const router = useRouter();
+  const pathname = usePathname();
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
   useEffect(() => {
@@ -46,21 +47,24 @@ export default function DashboardLayout({
       {/* Sidebar Desktop */}
       <aside className={styles.sidebar}>
         <div className={styles.logo}>
-          <Leaf size={24} color="var(--primary)" />
+          <Leaf size={32} color="#10b981" />
           <span>DevSus</span>
         </div>
 
         <nav className={styles.nav}>
-          {navItems.map((item) => (
-            <button 
-              key={item.label} 
-              className={styles.navItem}
-              onClick={() => router.push(item.href)}
-            >
-              <item.icon size={20} />
-              {item.label}
-            </button>
-          ))}
+          {navItems.map((item) => {
+            const isActive = pathname === item.href;
+            return (
+              <button 
+                key={item.label} 
+                className={`${styles.navItem} ${isActive ? styles.activeNavItem : ''}`}
+                onClick={() => router.push(item.href)}
+              >
+                <item.icon size={22} />
+                {item.label}
+              </button>
+            );
+          })}
         </nav>
 
         <div className={styles.sidebarFooter}>
