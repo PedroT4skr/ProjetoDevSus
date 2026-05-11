@@ -1,10 +1,9 @@
 .container {
-  padding: 2rem;
+  padding: 2.5rem;
   max-width: 1400px;
   margin: 0 auto;
   min-height: 100vh;
   position: relative;
-  overflow: hidden;
 }
 
 /* Header */
@@ -16,7 +15,7 @@
 }
 
 .welcomeInfo h2 {
-  font-size: 2.25rem;
+  font-size: 2.75rem;
   color: #1e293b;
   font-weight: 900;
   letter-spacing: -0.025em;
@@ -102,8 +101,8 @@
 }
 
 .heroContent h3 {
-  font-size: 2rem;
-  margin-bottom: 1rem;
+  font-size: 2.5rem;
+  margin-bottom: 1.25rem;
   font-weight: 800;
 }
 
@@ -228,8 +227,9 @@
 }
 
 .statData h3 {
-  font-size: 1.75rem;
+  font-size: 2.25rem;
   color: #1e293b;
+  font-weight: 800;
 }
 
 /* Main Grid */
@@ -412,6 +412,61 @@
 .residueIconBig {
   font-size: 2.5rem;
   margin-bottom: 1rem;
+}
+
+.historyList {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.historyItem {
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+  padding: 1.25rem;
+  background: #f8fafc;
+  border-radius: 20px;
+  transition: all 0.2s ease;
+}
+
+.historyItem:hover {
+  background: #f1f5f9;
+  transform: scale(1.01);
+}
+
+.historyIcon {
+  font-size: 1.5rem;
+}
+
+.historyInfo {
+  flex: 1;
+}
+
+.historyInfo h4 {
+  font-size: 1rem;
+  font-weight: 700;
+  color: #1e293b;
+}
+
+.historyInfo p {
+  font-size: 0.8rem;
+  color: #64748b;
+}
+
+.historyStatus {
+  font-size: 0.75rem;
+  font-weight: 800;
+  color: #10b981;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.noHistory {
+  text-align: center;
+  color: #64748b;
+  padding: 2rem;
+  font-style: italic;
 }
 
 @media (max-width: 1200px) {
