@@ -217,13 +217,14 @@
   background: white;
   border-radius: 24px;
   padding: 1.5rem;
+  padding-bottom: 3.5rem; /* Space for dots */
   position: relative;
   overflow: hidden;
   border: 1px solid #f1f5f9;
   box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.04);
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  height: 280px; /* Fixed height to prevent jumps */
 }
 
 .carouselContent {
@@ -365,25 +366,28 @@
 
 .carouselDots {
   position: absolute;
-  bottom: 1rem;
-  left: 50%;
-  transform: translateX(-50%);
+  bottom: 1.25rem;
+  left: 0;
+  right: 0;
   display: flex;
-  gap: 0.5rem;
+  justify-content: center;
+  gap: 0.6rem;
+  pointer-events: none;
 }
 
 .dot {
-  width: 6px;
-  height: 6px;
+  width: 8px;
+  height: 8px;
   border-radius: 50%;
   background: #e2e8f0;
-  transition: all 0.3s ease;
+  transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
 }
 
 .activeDot {
-  width: 16px;
-  border-radius: 3px;
+  width: 24px;
+  border-radius: 4px;
   background: #10b981;
+  box-shadow: 0 2px 4px rgba(16, 185, 129, 0.2);
 }
 
 /* Main Grid */
