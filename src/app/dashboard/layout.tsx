@@ -43,11 +43,11 @@ export default function DashboardLayout({
   ];
 
   return (
-    <div className={styles.container}>
+    <div className={`${styles.container} ${user.role === 'COLETOR' ? styles.collectorTheme : ''}`}>
       {/* Sidebar Desktop */}
       <aside className={styles.sidebar}>
         <div className={styles.logo}>
-          <Leaf size={32} color="#10b981" />
+          <Leaf size={32} color={user.role === 'COLETOR' ? '#2563eb' : '#10b981'} />
           <span>DevSus</span>
         </div>
 

@@ -62,13 +62,6 @@ export default function CollectorDashboard() {
           <h2>Painel do Coletor</h2>
           <p>Olá, {user?.name.split(' ')[0]}! Veja suas tarefas para hoje.</p>
         </motion.div>
-        <motion.div 
-          className={styles.statusBadge}
-          initial={{ opacity: 0, x: 20 }}
-          animate={{ opacity: 1, x: 0 }}
-        >
-          <span className={styles.dot}></span> Sistema Ativo
-        </motion.div>
       </header>
 
       <div className={styles.statsRow}>

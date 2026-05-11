@@ -210,3 +210,18 @@
   from { transform: translateX(-100%); }
   to { transform: translateX(0); }
 }
+
+/* Collector Theme Overrides */
+.collectorTheme .activeNavItem {
+  background: rgba(37, 99, 235, 0.1);
+  color: #2563eb;
+}
+
+.collectorTheme .activeNavItem::before {
+  background: #2563eb;
+}
+
+.collectorTheme .sidebarAvatar {
+  background: linear-gradient(135deg, #2563eb 0%, #1d4ed8 100%);
+  box-shadow: 0 4px 10px rgba(37, 99, 235, 0.3);
+}
