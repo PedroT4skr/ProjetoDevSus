@@ -120,56 +120,79 @@ export default function ResidentDashboard() {
           </div>
         </section>
 
-        <section className={styles.newsBanner}>
-            <div className={styles.newsTitle}>Notícias Verdes 🌿</div>
-            <div className={styles.newsContent}>
-              <motion.div 
-                animate={{ x: [0, -200, 0] }} 
-                transition={{ duration: 15, repeat: Infinity, ease: "linear" }}
-                className={styles.newsTrack}
-              >
-                <span>🎉 Condomínio bateu a meta de reciclagem de papel!</span>
-                <span className={styles.newsDivider}>|</span>
-                <span>🚛 Nova coleta de eletrônicos neste sábado às 10h.</span>
-                <span className={styles.newsDivider}>|</span>
-                <span>💡 Dica: Lave suas embalagens de iogurte antes de descartar.</span>
-              </motion.div>
-            </div>
-        </section>
-      </div>
-
-      <section className={styles.stats}>
-        <div className={styles.statCard}>
-          <div className={styles.statIcon} style={{ background: '#ecfdf5', color: '#10b981' }}>
-            <CheckCircle2 size={24} />
-          </div>
-          <div className={styles.statData}>
-            <div className={styles.statHeader}>
-                <h3>{requests.filter(r => r.status === 'COLETADO').length}</h3>
-                <span className={styles.trend}><ArrowUpRight size={12} /> +12%</span>
-            </div>
-            <p>Concluídas</p>
-          </div>
-        </div>
-        <div className={styles.statCard}>
-          <div className={styles.statIcon} style={{ background: '#fffbeb', color: '#f59e0b' }}>
-            <Clock size={24} />
-          </div>
-          <div className={styles.statData}>
-            <h3>{requests.filter(r => r.status === 'PENDENTE' || r.status === 'EM_ROTA').length}</h3>
-            <p>Em progresso</p>
-          </div>
-        </div>
-        <div className={styles.statCard}>
-          <div className={styles.statIcon} style={{ background: '#eff6ff', color: '#3b82f6' }}>
-            <Zap size={24} />
-          </div>
-          <div className={styles.statData}>
-            <h3>450</h3>
-            <p>EcoPoints</p>
-          </div>
+      <section className={styles.newsBanner}>
+        <div className={styles.newsTitle}>Notícias Verdes 🌿</div>
+        <div className={styles.newsContent}>
+          <motion.div 
+            animate={{ x: [0, -200, 0] }} 
+            transition={{ duration: 15, repeat: Infinity, ease: "linear" }}
+            className={styles.newsTrack}
+          >
+            <span>🎉 Condomínio bateu a meta de reciclagem de papel!</span>
+            <span className={styles.newsDivider}>|</span>
+            <span>🚛 Nova coleta de eletrônicos neste sábado às 10h.</span>
+            <span className={styles.newsDivider}>|</span>
+            <span>💡 Dica: Lave suas embalagens de iogurte antes de descartar.</span>
+          </motion.div>
         </div>
       </section>
+
+      <div className={styles.topGrid}>
+        <section className={styles.heroCard}>
+          <div className={styles.heroContent}>
+            <div className={styles.heroBadge}><Sparkles size={14} /> Novo no App</div>
+            <h3>Facilite seu descarte</h3>
+            <p>Solicite a coleta de recicláveis em segundos.</p>
+            <motion.button 
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.95 }}
+              className={styles.ctaButton} 
+              onClick={() => setIsModalOpen(true)}
+            >
+              <Plus size={20} /> Solicitar Coleta
+            </motion.button>
+          </div>
+          <div className={styles.heroComposition}>
+             <div className={styles.compIcon1}><Trash2 size={48} /></div>
+             <div className={styles.compIcon2}><Package size={40} /></div>
+             <div className={styles.compIcon3}><Leaf size={32} /></div>
+             <div className={styles.compCircle}></div>
+          </div>
+        </section>
+
+        <section className={styles.stats}>
+          <div className={styles.statCard}>
+            <div className={styles.statIcon} style={{ background: '#ecfdf5', color: '#10b981' }}>
+              <CheckCircle2 size={24} />
+            </div>
+            <div className={styles.statData}>
+              <div className={styles.statHeader}>
+                  <h3>{requests.filter(r => r.status === 'COLETADO').length}</h3>
+                  <span className={styles.trend}><ArrowUpRight size={12} /> +12%</span>
+              </div>
+              <p>Concluídas</p>
+            </div>
+          </div>
+          <div className={styles.statCard}>
+            <div className={styles.statIcon} style={{ background: '#fffbeb', color: '#f59e0b' }}>
+              <Clock size={24} />
+            </div>
+            <div className={styles.statData}>
+              <h3>{requests.filter(r => r.status === 'PENDENTE' || r.status === 'EM_ROTA').length}</h3>
+              <p>Em progresso</p>
+            </div>
+          </div>
+          <div className={styles.statCard}>
+            <div className={styles.statIcon} style={{ background: '#eff6ff', color: '#3b82f6' }}>
+              <Zap size={24} />
+            </div>
+            <div className={styles.statData}>
+              <h3>450</h3>
+              <p>EcoPoints</p>
+            </div>
+          </div>
+        </section>
+      </div>
 
       <div className={styles.mainGrid}>
         <div className={styles.leftCol}>
