@@ -39,7 +39,16 @@ function WheelPicker({ options, value, onChange }: WheelPickerProps) {
   const offset = -selectedIndex * itemHeight;
 
   return (
-    <div className={styles.wheelColumn}>
+    <div 
+      className={styles.wheelColumn}
+      onWheel={(e) => {
+        const direction = e.deltaY > 0 ? 1 : -1;
+        const newIndex = Math.max(0, Math.min(options.length - 1, selectedIndex + direction));
+        if (newIndex !== selectedIndex) {
+          onChange(options[newIndex]);
+        }
+      }}
+    >
       <motion.div
         className={styles.wheelList}
         drag="y"
