@@ -75,7 +75,7 @@ export default function ResidentDashboard() {
       <header className={styles.header}>
         <div className={styles.welcomeInfo}>
           <h2>Olá, {user?.name.split(' ')[0]}! 👋</h2>
-          <p>Seu condomínio já reciclagem <strong>128kg</strong> este mês.</p>
+          <p>Seu condomínio já reciclou <strong>128kg</strong> este mês.</p>
         </div>
       </header>
 
@@ -89,11 +89,12 @@ export default function ResidentDashboard() {
         </div>
         <div className={styles.heroImage}>
           <Image 
-            src="/resident_hero_illustration_1778528148225.png" 
+            src="/resident_hero.png" 
             alt="Reciclagem" 
             width={200} 
             height={200} 
             className={styles.illustration}
+            priority
           />
         </div>
       </section>
