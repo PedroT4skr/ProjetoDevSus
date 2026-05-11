@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useCallback } from 'react';
 import { useAuth } from '@/contexts/AuthContext';
 import { RequestRepository } from '@/services/repositories';
 import { CollectionRequest, ResidueType } from '@/lib/types';
@@ -35,17 +35,19 @@ export default function ResidentDashboard() {
     obs: string;
   }>({ type: '', time: '', obs: '' });
 
-  useEffect(() => {
-    let isMounted = true;
-    const fetch = async () => {
-      if (user) {
-        const data = await RequestRepository.getByResident(user.id);
-        if (isMounted) setRequests(data);
-      }
-    };
-    fetch();
-    return () => { isMounted = false; };
+  const loadRequests = useCallback(async () => {
+    if (user) {
+      const data = await RequestRepository.getByResident(user.id);
+      setRequests(data);
+    }
   }, [user]);
+
+  useEffect(() => {
+    const init = async () => {
+      await loadRequests();
+    };
+    init();
+  }, [loadRequests]);
 
   const handleCreateRequest = async () => {
     if (!user || !newRequest.type) return;
