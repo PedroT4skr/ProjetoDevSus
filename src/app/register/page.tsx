@@ -221,7 +221,7 @@ export default function RegisterPage() {
         <div className={styles.footer}>
           <p>Já tem conta? <a href="/login">Entre aqui</a></p>
         </div>
-      </div>
+      </motion.div>
     </div>
   );
 }
