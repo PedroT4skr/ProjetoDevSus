@@ -206,13 +206,54 @@ export default function Home() {
             </div>
             <div className={styles.howVisual}>
                <div className={styles.visualMockup}>
-                 {/* Placeholder para imagem do app */}
-                 <div className={styles.appScreen}>
-                    <div className={styles.appHeader} />
-                    <div className={styles.appContent}>
-                       <div className={styles.skeletonLine} />
-                       <div className={styles.skeletonLine} style={{ width: '60%' }} />
-                       <div className={styles.skeletonCircle} />
+                 <div className={styles.phoneFrame}>
+                    <div className={styles.phoneHeader}>
+                      <div className={styles.phoneSpeaker} />
+                    </div>
+                    <div className={styles.appScreen}>
+                       <div className={styles.appNav}>
+                         <div className={styles.appAvatar} />
+                         <div className={styles.appSearch} />
+                       </div>
+                       <div className={styles.appMap}>
+                          <div className={styles.mapGrid} />
+                          <motion.div 
+                            animate={{ 
+                              x: [10, 80, 40, 100], 
+                              y: [20, 10, 60, 30] 
+                            }}
+                            transition={{ duration: 10, repeat: Infinity, ease: "linear" }}
+                            className={styles.mapTruck}
+                          >
+                            <Truck size={14} color="white" />
+                          </motion.div>
+                          <div className={styles.mapPin}>
+                            <div className={styles.pinPulse} />
+                            <div className={styles.pinDot} />
+                          </div>
+                       </div>
+                       <div className={styles.appOverlay}>
+                          <motion.div 
+                            initial={{ y: 50, opacity: 0 }}
+                            whileInView={{ y: 0, opacity: 1 }}
+                            className={styles.mockCard}
+                          >
+                             <div className={styles.mockCardHeader}>
+                               <strong>Coleta em Rota</strong>
+                               <span>4 min</span>
+                             </div>
+                             <div className={styles.mockProgress}>
+                                <div className={styles.mockFill} />
+                             </div>
+                             <div className={styles.mockUser}>
+                                <div className={styles.mockAvatar} />
+                                <div className={styles.mockText}>
+                                   <strong>Carlos Silva</strong>
+                                   <span>Coletor Verificado</span>
+                                </div>
+                             </div>
+                          </motion.div>
+                       </div>
                     </div>
                  </div>
                </div>
