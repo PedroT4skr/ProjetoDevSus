@@ -206,10 +206,35 @@ export default function ResidentDashboard() {
             </motion.button>
           </div>
           <div className={styles.heroComposition}>
-             <div className={styles.compIcon1}><Trash2 size={48} /></div>
-             <div className={styles.compIcon2}><Package size={40} /></div>
-             <div className={styles.compIcon3}><Leaf size={32} /></div>
-             <div className={styles.compCircle}></div>
+            <motion.div 
+              className={styles.compIcon1}
+              animate={{ y: [0, -15, 0] }}
+              transition={{ duration: 4.5, repeat: Infinity, ease: "easeInOut" }}
+            >
+              <Trash2 size={48} />
+            </motion.div>
+            <motion.div 
+              className={styles.compIcon2}
+              animate={{ y: [0, -12, 0] }}
+              transition={{ duration: 3.8, repeat: Infinity, ease: "easeInOut", delay: 0.5 }}
+            >
+              <Package size={40} />
+            </motion.div>
+            <motion.div 
+              className={styles.compIcon3}
+              animate={{ y: [0, -10, 0] }}
+              transition={{ duration: 5.2, repeat: Infinity, ease: "easeInOut", delay: 1 }}
+            >
+              <Leaf size={32} />
+            </motion.div>
+            <motion.div 
+              className={styles.compIcon4}
+              animate={{ y: [0, -14, 0] }}
+              transition={{ duration: 4.2, repeat: Infinity, ease: "easeInOut", delay: 1.5 }}
+            >
+              <Sparkles size={28} />
+            </motion.div>
+            <div className={styles.compCircle}></div>
           </div>
         </section>
 
