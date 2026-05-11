@@ -4,7 +4,7 @@ import { useState } from 'react';
 import { useRouter } from 'next/navigation';
 import { useAuth } from '@/contexts/AuthContext';
 import { UserRepository } from '@/services/repositories';
-import { Leaf, User, Mail, Building, ArrowRight, Lock } from 'lucide-react';
+import { Leaf, User, Mail, Building, ArrowRight, Lock, Truck } from 'lucide-react';
 import styles from './register.module.css';
 import { UserRole } from '@/lib/types';
 
@@ -62,6 +62,23 @@ export default function RegisterPage() {
           <p>Junte-se ao movimento sustentável</p>
         </div>
 
+        <div className={styles.roleToggle}>
+          <button
+            type="button"
+            className={`${styles.roleButton} ${formData.role === 'MORADOR' ? styles.activeRole : ''}`}
+            onClick={() => setFormData({ ...formData, role: 'MORADOR' })}
+          >
+            <User size={18} /> Sou Morador
+          </button>
+          <button
+            type="button"
+            className={`${styles.roleButton} ${formData.role === 'COLETOR' ? styles.activeRole : ''}`}
+            onClick={() => setFormData({ ...formData, role: 'COLETOR' })}
+          >
+            <Truck size={18} /> Sou Coletor
+          </button>
+        </div>
+
         <form onSubmit={handleSubmit} className={styles.form}>
           <div className={styles.inputGroup}>
             <label>Nome Completo</label>
@@ -105,35 +122,21 @@ export default function RegisterPage() {
             </div>
           </div>
 
-          <div className={styles.row}>
-            {formData.role === 'MORADOR' && (
-              <div className={styles.inputGroup}>
-                <label>Apartamento</label>
-                <div className={styles.inputWrapper}>
-                  <Building size={20} className={styles.icon} />
-                  <input
-                    type="text"
-                    placeholder="101A"
-                    value={formData.apartment}
-                    onChange={(e) => setFormData({...formData, apartment: e.target.value})}
-                    required
-                  />
-                </div>
-              </div>
-            )}
-
+          {formData.role === 'MORADOR' && (
             <div className={styles.inputGroup}>
-              <label>Eu sou...</label>
-              <select 
-                className={styles.select}
-                value={formData.role}
-                onChange={(e) => setFormData({...formData, role: e.target.value as UserRole})}
-              >
-                <option value="MORADOR">Morador</option>
-                <option value="COLETOR">Coletor</option>
-              </select>
+              <label>Apartamento</label>
+              <div className={styles.inputWrapper}>
+                <Building size={20} className={styles.icon} />
+                <input
+                  type="text"
+                  placeholder="101A"
+                  value={formData.apartment}
+                  onChange={(e) => setFormData({...formData, apartment: e.target.value})}
+                  required
+                />
+              </div>
             </div>
-          </div>
+          )}
 
           {error && <div className={styles.error}>{error}</div>}
 
