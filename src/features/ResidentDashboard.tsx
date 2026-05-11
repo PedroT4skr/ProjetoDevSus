@@ -231,82 +231,37 @@ export default function ResidentDashboard() {
 
       <div className={styles.mainGrid}>
         <div className={styles.leftCol}>
-          <section className={styles.activeSection}>
+          <section className={styles.historySection}>
             <div className={styles.sectionHeader}>
-              <h3>Painel de Ações</h3>
-                <div className={styles.tabs}>
-                    <button 
-                      className={activeTab === 'PROXIMA' ? styles.activeTab : styles.tab}
-                      onClick={() => setActiveTab('PROXIMA')}
-                    >
-                      Próxima Coleta
-                    </button>
-                    <button 
-                      className={activeTab === 'HISTORICO' ? styles.activeTab : styles.tab}
-                      onClick={() => setActiveTab('HISTORICO')}
-                    >
-                      Histórico
-                    </button>
-                </div>
+              <h3>Histórico de Coletas</h3>
+              <span className={styles.historyBadge}>{requests.length} total</span>
             </div>
 
-            {activeTab === 'PROXIMA' ? (
-              activeRequest ? (
-                <div className={styles.activeCard}>
-                  <div className={styles.activeInfo}>
-                      <div className={styles.residueIconBig}>
-                        {RESIDUE_TYPES.find(t => t.type === activeRequest.residueType)?.icon}
+            <div className={styles.historyList}>
+              {requests.length > 0 ? (
+                requests.map(req => (
+                  <div key={req.id} className={styles.historyItem}>
+                    <div className={styles.historyIcon}>{RESIDUE_TYPES.find(t => t.type === req.residueType)?.icon}</div>
+                    <div className={styles.historyInfo}>
+                      <div className={styles.historyRow}>
+                        <h4>{req.residueType}</h4>
+                        <span className={`${styles.statusBadge} ${styles[req.status.toLowerCase()]}`}>
+                          {req.status === 'COLETADO' ? 'Concluído' : req.status === 'PENDENTE' ? 'Aguardando' : req.status === 'EM_ROTA' ? 'Em Rota' : 'Cancelado'}
+                        </span>
                       </div>
-                      <div>
-                        <h4>{activeRequest.residueType}</h4>
-                        <p><Clock size={14} /> Disponível às: {activeRequest.availableTime}</p>
-                      </div>
+                      <p>{req.status === 'COLETADO' ? 'Coletado em 12/05' : req.status === 'PENDENTE' ? 'Disponível às ' + req.availableTime : 'Status: ' + req.status}</p>
+                    </div>
                   </div>
-                  <div className={styles.steps}>
-                      <div className={`${styles.step} ${styles.active}`}>
-                        <div className={styles.stepCircle}><CheckCircle2 size={16} /></div>
-                        <span>Solicitado</span>
-                      </div>
-                      <div className={`${styles.step} ${activeRequest.status === 'EM_ROTA' ? styles.active : ''}`}>
-                        <div className={styles.stepCircle}><Package size={16} /></div>
-                        <span>Em Rota</span>
-                      </div>
-                      <div className={styles.step}>
-                        <div className={styles.stepCircle}><Trash2 size={16} /></div>
-                        <span>Coletado</span>
-                      </div>
-                  </div>
-                </div>
+                ))
               ) : (
-                <div className={styles.emptyState}>
-                  <div className={styles.emptyIcon}>
-                    <Leaf size={48} />
-                  </div>
-                  <h3>Tudo limpo!</h3>
-                  <p>Que tal separar algo para reciclar agora?</p>
+                <div className={styles.emptyHistory}>
+                  <p>Nenhuma coleta registrada.</p>
                   <button className={styles.outlineButton} onClick={() => setIsModalOpen(true)}>
-                    Solicitar Coleta
+                    Fazer minha primeira coleta
                   </button>
                 </div>
-              )
-            ) : (
-              <div className={styles.historyList}>
-                {requests.filter(r => r.status === 'COLETADO' || r.status === 'CANCELADO').length > 0 ? (
-                  requests.filter(r => r.status === 'COLETADO' || r.status === 'CANCELADO').map(req => (
-                    <div key={req.id} className={styles.historyItem}>
-                      <div className={styles.historyIcon}>{RESIDUE_TYPES.find(t => t.type === req.residueType)?.icon}</div>
-                      <div className={styles.historyInfo}>
-                        <h4>{req.residueType}</h4>
-                        <p>{req.status === 'COLETADO' ? 'Coletado em 12/05' : 'Cancelado'}</p>
-                      </div>
-                      <span className={styles.historyStatus}>{req.status}</span>
-                    </div>
-                  ))
-                ) : (
-                  <p className={styles.noHistory}>Nenhum histórico encontrado.</p>
-                )}
-              </div>
-            )}
+              )}
+            </div>
           </section>
         </div>
 
