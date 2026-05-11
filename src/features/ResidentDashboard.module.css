@@ -532,9 +532,8 @@
   margin-bottom: 1.25rem;
 }
 
- @ m e d i a   ( m a x - w i d t h :   1 2 0 0 p x )   { 
-     . t o p G r i d ,   . m a i n G r i d   { 
-         g r i d - t e m p l a t e - c o l u m n s :   1 f r ; 
-     } 
- }  
- 
+@media (max-width: 1200px) {
+  .topGrid, .mainGrid {
+    grid-template-columns: 1fr;
+  }
+}
