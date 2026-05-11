@@ -43,6 +43,15 @@ export default function ResidentDashboard() {
     obs: string;
   }>({ type: '', time: '', obs: '' });
 
+  const [carouselIndex, setCarouselIndex] = useState(0);
+
+  useEffect(() => {
+    const timer = setInterval(() => {
+      setCarouselIndex(prev => (prev + 1) % 2);
+    }, 5000);
+    return () => clearInterval(timer);
+  }, []);
+
   const loadRequests = useCallback(async () => {
     if (user) {
       const data = await RequestRepository.getByResident(user.id);
@@ -82,7 +91,7 @@ export default function ResidentDashboard() {
       <header className={styles.header}>
         <div className={styles.welcomeInfo}>
           <h2>Olá, {user?.name.split(' ')[0]}! 👋</h2>
-          <p>O seu condomínio já reciclou um total de <strong>128kg</strong> este mês.</p>
+          <p>Seu condomínio já reciclou um total de <strong>128kg</strong> este mês.</p>
         </div>
         <div className={styles.headerActions}>
           <button className={styles.iconButton} onClick={() => alert('Chat em breve!')}><MessageSquare size={20} /></button>
@@ -97,21 +106,36 @@ export default function ResidentDashboard() {
         <motion.div animate={{ rotate: 360 }} transition={{ duration: 20, repeat: Infinity, ease: "linear" }} className={styles.floatingStar}><Sparkles size={20} /></motion.div>
       </div>
 
+      <section className={styles.statsRow}>
+        <div className={styles.statMiniCard}>
+          <div className={styles.statMiniIcon} style={{ background: '#ecfdf5', color: '#10b981' }}>
+            <CheckCircle2 size={18} />
+          </div>
+          <div className={styles.statMiniInfo}>
+            <span>{requests.filter(r => r.status === 'COLETADO').length}</span>
+            <p>Concluídas</p>
+          </div>
+          <span className={styles.miniTrend}>+12%</span>
+        </div>
+        
+        <div className={styles.statMiniCard}>
+          <div className={styles.statMiniIcon} style={{ background: '#fffbeb', color: '#f59e0b' }}>
+            <Clock size={18} />
+          </div>
+          <div className={styles.statMiniInfo}>
+            <span>{requests.filter(r => r.status === 'PENDENTE' || r.status === 'EM_ROTA').length}</span>
+            <p>Em progresso</p>
+          </div>
+        </div>
 
-      <section className={styles.newsBanner}>
-        <div className={styles.newsTitle}>Notícias Verdes 🌿</div>
-        <div className={styles.newsContent}>
-          <motion.div 
-            animate={{ x: [0, -200, 0] }} 
-            transition={{ duration: 15, repeat: Infinity, ease: "linear" }}
-            className={styles.newsTrack}
-          >
-            <span>🎉 Condomínio bateu a meta de reciclagem de papel!</span>
-            <span className={styles.newsDivider}>|</span>
-            <span>🚛 Nova coleta de eletrônicos neste sábado às 10h.</span>
-            <span className={styles.newsDivider}>|</span>
-            <span>💡 Dica: Lave suas embalagens de iogurte antes de descartar.</span>
-          </motion.div>
+        <div className={styles.statMiniCard}>
+          <div className={styles.statMiniIcon} style={{ background: '#eff6ff', color: '#3b82f6' }}>
+            <Zap size={18} />
+          </div>
+          <div className={styles.statMiniInfo}>
+            <span>450</span>
+            <p>EcoPoints</p>
+          </div>
         </div>
       </section>
 
@@ -138,36 +162,54 @@ export default function ResidentDashboard() {
           </div>
         </section>
 
-        <section className={styles.stats}>
-          <div className={styles.statCard}>
-            <div className={styles.statIcon} style={{ background: '#ecfdf5', color: '#10b981' }}>
-              <CheckCircle2 size={24} />
-            </div>
-            <div className={styles.statData}>
-              <div className={styles.statHeader}>
-                  <h3>{requests.filter(r => r.status === 'COLETADO').length}</h3>
-                  <span className={styles.trend}><ArrowUpRight size={12} /> +12%</span>
-              </div>
-              <p>Concluídas</p>
-            </div>
-          </div>
-          <div className={styles.statCard}>
-            <div className={styles.statIcon} style={{ background: '#fffbeb', color: '#f59e0b' }}>
-              <Clock size={24} />
-            </div>
-            <div className={styles.statData}>
-              <h3>{requests.filter(r => r.status === 'PENDENTE' || r.status === 'EM_ROTA').length}</h3>
-              <p>Em progresso</p>
-            </div>
-          </div>
-          <div className={styles.statCard}>
-            <div className={styles.statIcon} style={{ background: '#eff6ff', color: '#3b82f6' }}>
-              <Zap size={24} />
-            </div>
-            <div className={styles.statData}>
-              <h3>450</h3>
-              <p>EcoPoints</p>
-            </div>
+        <section className={styles.carouselCard}>
+          <AnimatePresence mode="wait">
+            {carouselIndex === 0 ? (
+              <motion.div 
+                key="impact"
+                initial={{ opacity: 0, x: 20 }}
+                animate={{ opacity: 1, x: 0 }}
+                exit={{ opacity: 0, x: -20 }}
+                className={styles.carouselContent}
+              >
+                <div className={styles.impactHeader}>
+                  <Star size={24} className={styles.impactIcon} />
+                  <h4>EcoImpacto</h4>
+                </div>
+                <div className={styles.impactMain}>
+                  <div className={styles.impactValue}>12.4kg</div>
+                  <p>CO2 evitado este mês</p>
+                </div>
+                <div className={styles.impactBadge}>Equivalente a 5 árvores plantadas 🌳</div>
+              </motion.div>
+            ) : (
+              <motion.div 
+                key="tips"
+                initial={{ opacity: 0, x: 20 }}
+                animate={{ opacity: 1, x: 0 }}
+                exit={{ opacity: 0, x: -20 }}
+                className={styles.carouselContent}
+              >
+                <div className={styles.impactHeader}>
+                  <Sparkles size={24} className={styles.impactIcon} />
+                  <h4>Dicas de Reciclagem</h4>
+                </div>
+                <div className={styles.tipsList}>
+                  <div className={styles.miniTip}>
+                    <span>💡</span>
+                    <p><strong>Lave as embalagens:</strong> Retirar restos de comida ajuda no valor do material.</p>
+                  </div>
+                  <div className={styles.miniTip}>
+                    <span>📦</span>
+                    <p><strong>Compacte caixas:</strong> Economiza espaço e facilita o transporte.</p>
+                  </div>
+                </div>
+              </motion.div>
+            )}
+          </AnimatePresence>
+          <div className={styles.carouselDots}>
+            <div className={`${styles.dot} ${carouselIndex === 0 ? styles.activeDot : ''}`} />
+            <div className={`${styles.dot} ${carouselIndex === 1 ? styles.activeDot : ''}`} />
           </div>
         </section>
       </div>
@@ -284,32 +326,6 @@ export default function ResidentDashboard() {
                     </div>
                     <span className={styles.rankValue}>12.4kg</span>
                 </div>
-            </div>
-          </section>
-
-          <section className={styles.impactCard}>
-            <div className={styles.impactIcon}><Star size={24} /></div>
-            <h4>EcoImpacto</h4>
-            <div className={styles.impactValue}>12.4kg</div>
-            <p>CO2 evitado este mês</p>
-            <div className={styles.impactDetail}>Equivalente a 5 árvores plantadas 🌳</div>
-          </section>
-
-          <section className={styles.tipsSection}>
-            <h3>Dicas de Reciclagem</h3>
-            <div className={styles.tipCard}>
-              <div className={styles.tipIcon}>💡</div>
-              <div className={styles.tipText}>
-                <h4>Lave as embalagens</h4>
-                <p>Retirar restos de comida ajuda a manter o valor do material.</p>
-              </div>
-            </div>
-            <div className={styles.tipCard}>
-              <div className={styles.tipIcon}>📦</div>
-              <div className={styles.tipText}>
-                <h4>Compacte caixas</h4>
-                <p>Economiza espaço e facilita o transporte.</p>
-              </div>
             </div>
           </section>
         </div>
