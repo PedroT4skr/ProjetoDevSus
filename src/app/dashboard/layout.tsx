@@ -59,12 +59,18 @@ export default function DashboardLayout({
 
   const navItems = getNavItems();
 
+  const getThemeClass = () => {
+    if (user.role === 'COLETOR') return styles.collectorTheme;
+    if (user.role === 'ADMIN') return styles.adminTheme;
+    return '';
+  };
+
   return (
-    <div className={`${styles.container} ${user.role === 'COLETOR' ? styles.collectorTheme : ''}`}>
+    <div className={`${styles.container} ${getThemeClass()}`}>
       {/* Sidebar Desktop */}
       <aside className={styles.sidebar}>
         <div className={styles.logo}>
-          <Leaf size={32} color={user.role === 'COLETOR' ? '#2563eb' : '#10b981'} />
+          <Leaf size={32} color={user.role === 'COLETOR' ? '#2563eb' : user.role === 'ADMIN' ? '#eab308' : '#10b981'} />
           <span>Consus</span>
         </div>
 
