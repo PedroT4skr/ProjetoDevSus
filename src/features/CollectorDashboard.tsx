@@ -10,8 +10,13 @@ import {
   CheckCircle2, 
   Navigation, 
   Package,
-  AlertCircle
+  AlertCircle,
+  TrendingUp,
+  Zap,
+  Route,
+  ChevronRight
 } from 'lucide-react';
+import { motion, AnimatePresence } from 'framer-motion';
 import styles from './CollectorDashboard.module.css';
 
 export default function CollectorDashboard() {
@@ -50,91 +55,152 @@ export default function CollectorDashboard() {
   return (
     <div className={styles.container}>
       <header className={styles.header}>
-        <div>
-          <h2>Painel de Coletas</h2>
-          <p>Gerencie suas rotas e tarefas de hoje.</p>
-        </div>
-        <div className={styles.statusBadge}>
-          <span className={styles.dot}></span> Online
-        </div>
+        <motion.div
+          initial={{ opacity: 0, x: -20 }}
+          animate={{ opacity: 1, x: 0 }}
+        >
+          <h2>Painel do Coletor</h2>
+          <p>Olá, {user?.name.split(' ')[0]}! Veja suas tarefas para hoje.</p>
+        </motion.div>
+        <motion.div 
+          className={styles.statusBadge}
+          initial={{ opacity: 0, x: 20 }}
+          animate={{ opacity: 1, x: 0 }}
+        >
+          <span className={styles.dot}></span> Sistema Ativo
+        </motion.div>
       </header>
 
-      {myTasks.length > 0 && (
-        <section className={styles.activeSection}>
+      <div className={styles.statsRow}>
+        {[
+          { label: 'Coletas Hoje', value: '12', icon: <Package size={20} />, delay: 0.1 },
+          { label: 'EcoPontos', value: '450', icon: <Zap size={20} />, delay: 0.2 },
+          { label: 'Km Estimados', value: '5.2', icon: <Route size={20} />, delay: 0.3 },
+        ].map((stat, i) => (
+          <motion.div 
+            key={i}
+            className={styles.statCard}
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: stat.delay }}
+          >
+            <div className={styles.statIcon}>{stat.icon}</div>
+            <div className={styles.statInfo}>
+              <h4>{stat.value}</h4>
+              <p>{stat.label}</p>
+            </div>
+          </motion.div>
+        ))}
+      </div>
+
+      <div className={styles.mainGrid}>
+        <section className={styles.section}>
           <div className={styles.sectionHeader}>
-            <Navigation size={20} className={styles.primaryIcon} />
-            <h3>Minhas Rotas Atuais</h3>
+            <h3><Navigation size={18} className={styles.activeIcon} /> Em Rota Agora</h3>
+            <span className={styles.typeBadge}>{myTasks.length}</span>
           </div>
-          <div className={styles.taskGrid}>
-            {myTasks.map(task => (
-              <div key={task.id} className={styles.taskCard}>
-                <div className={styles.cardHeader}>
-                  <div className={styles.residentInfo}>
-                    <div className={styles.avatarSmall}>{task.residentName.charAt(0)}</div>
-                    <div>
-                      <h4>{task.residentName}</h4>
-                      <p>Apto {task.apartment}</p>
-                    </div>
-                  </div>
-                  <span className={styles.typeBadge}>{task.residueType}</span>
-                </div>
-                <div className={styles.cardBody}>
-                  <div className={styles.detail}>
-                    <Clock size={16} /> <span>Disponível: {task.availableTime}</span>
-                  </div>
-                  {task.observation && (
-                    <div className={styles.observation}>
-                      <AlertCircle size={14} /> {task.observation}
-                    </div>
-                  )}
-                </div>
-                <button 
-                  className={styles.completeButton}
-                  onClick={() => handleComplete(task.id)}
+          <div className={styles.scrollArea}>
+            <AnimatePresence mode="popLayout">
+              {myTasks.length === 0 ? (
+                <motion.div 
+                  className={styles.emptyState}
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: 1 }}
                 >
-                  <CheckCircle2 size={18} /> Marcar como Coletado
-                </button>
-              </div>
-            ))}
+                  <TrendingUp size={40} />
+                  <p>Inicie uma coleta ao lado para começar sua rota.</p>
+                </motion.div>
+              ) : (
+                myTasks.map(task => (
+                  <motion.div 
+                    key={task.id} 
+                    className={styles.taskCard}
+                    layout
+                    initial={{ opacity: 0, scale: 0.9 }}
+                    animate={{ opacity: 1, scale: 1 }}
+                    exit={{ opacity: 0, x: 50 }}
+                  >
+                    <div className={styles.cardTop}>
+                      <div className={styles.residentInfo}>
+                        <div className={styles.avatar}>{task.residentName.charAt(0)}</div>
+                        <div>
+                          <h4>{task.residentName}</h4>
+                          <p>Apto {task.apartment}</p>
+                        </div>
+                      </div>
+                      <span className={styles.typeBadge}>{task.residueType}</span>
+                    </div>
+                    <div className={styles.cardBody}>
+                      <div className={styles.detail}>
+                        <Clock size={16} /> {task.availableTime}
+                      </div>
+                      {task.observation && (
+                        <div className={styles.observation}>
+                          <AlertCircle size={14} /> {task.observation}
+                        </div>
+                      )}
+                    </div>
+                    <button 
+                      className={styles.completeButton}
+                      onClick={() => handleComplete(task.id)}
+                    >
+                      Finalizar Coleta
+                    </button>
+                  </motion.div>
+                ))
+              )}
+            </AnimatePresence>
           </div>
         </section>
-      )}
 
-      <section className={styles.pendingSection}>
-        <div className={styles.sectionHeader}>
-          <Package size={20} className={styles.secondaryIcon} />
-          <h3>Solicitações Pendentes ({pendingRequests.length})</h3>
-        </div>
-
-        {pendingRequests.length === 0 ? (
-          <div className={styles.emptyState}>
-            <CheckCircle2 size={48} color="var(--primary)" />
-            <p>Nenhuma solicitação pendente no momento.</p>
+        <section className={styles.section}>
+          <div className={styles.sectionHeader}>
+            <h3><Package size={18} className={styles.pendingIcon} /> Disponíveis para Coleta</h3>
+            <span className={styles.typeBadge}>{pendingRequests.length}</span>
           </div>
-        ) : (
-          <div className={styles.list}>
-            {pendingRequests.map(req => (
-              <div key={req.id} className={styles.listCard}>
-                <div className={styles.listMain}>
-                  <div className={styles.locationInfo}>
-                    <MapPin size={20} color="var(--primary)" />
-                    <div>
-                      <span className={styles.locName}>Apartamento {req.apartment}</span>
-                      <span className={styles.locSub}>{req.residueType} • {req.availableTime}</span>
-                    </div>
-                  </div>
-                  <button 
-                    className={styles.acceptButton}
-                    onClick={() => handleAccept(req.id)}
+          <div className={styles.scrollArea}>
+            <AnimatePresence mode="popLayout">
+              {pendingRequests.length === 0 ? (
+                <motion.div 
+                  className={styles.emptyState}
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: 1 }}
+                >
+                  <CheckCircle2 size={40} />
+                  <p>Bom trabalho! Nenhuma coleta pendente no momento.</p>
+                </motion.div>
+              ) : (
+                pendingRequests.map(req => (
+                  <motion.div 
+                    key={req.id} 
+                    className={styles.listCard}
+                    layout
+                    initial={{ opacity: 0, y: 10 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    exit={{ opacity: 0, x: -50 }}
                   >
-                    Aceitar Coleta
-                  </button>
-                </div>
-              </div>
-            ))}
+                    <div className={styles.listMain}>
+                      <div className={styles.locationInfo}>
+                        <MapPin size={20} color="#2563eb" />
+                        <div>
+                          <span className={styles.locName}>Apartamento {req.apartment}</span>
+                          <span className={styles.locSub}>{req.residueType} • {req.availableTime}</span>
+                        </div>
+                      </div>
+                      <button 
+                        className={styles.acceptButton}
+                        onClick={() => handleAccept(req.id)}
+                      >
+                        Aceitar
+                      </button>
+                    </div>
+                  </motion.div>
+                ))
+              )}
+            </AnimatePresence>
           </div>
-        )}
-      </section>
+        </section>
+      </div>
     </div>
   );
 }
